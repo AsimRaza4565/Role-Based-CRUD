@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Role-Based CRUD (Next.js + MongoDB (with mongoose) + TypeScript + Tailwind)
 
-## Getting Started
+A role & permission-based CRUD system built with **Next.js 14**, **TypeScript**, **MongoDB**, and **TailwindCSS**.  
+It includes authentication, user management, role & permission assignment, and protected routes using Next.js middleware.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- 🔑 Authentication with **NextAuth**
+- 👤 User CRUD (create, update, delete users)
+- 🛡 Role & Permission management
+- 📄 Post & Event CRUD (with granular permissions: create, read, update, delete)
+- 🔒 Middleware for protecting API routes and pages
+- 🎨 UI with TailwindCSS
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ⚡ Getting Started
 
-## Learn More
+1. Clone the repository:
 
-To learn more about Next.js, take a look at the following resources:
+   ```bash
+   git clone https://github.com/AsimRaza4565/Role-Based-CRUD.git
+   cd Role-Based-CRUD
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. Install dependencies:
+   npm install
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. Copy .env.example to .env.local and set your environment variables:
+   cp .env.example .env.local
 
-## Deploy on Vercel
+4. Run the development server:
+   npm run dev
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+📂 Folder Structure
+.
+├── app/ # Next.js App Router pages & API routes
+├── components/ # Reusable UI components
+├── lib/ # Utility functions (e.g., auth checks, db connect)
+├── models/ # Mongoose models (Schemas)
+├── middleware.ts # Middleware for role/permission checks
+├── public/ # Static assets
+├── styles/ # Global styles
+└── README.md
