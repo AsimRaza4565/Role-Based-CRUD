@@ -26,21 +26,18 @@ It includes authentication, user management, role & permission assignment, and p
    ```
 
 2. Install dependencies:
+
+   ```bash
    npm install
+   ```
 
 3. Copy .env.example to .env.local and set your environment variables:
+
+   ```bash
    cp .env.example .env.local
+   ```
 
 4. Run the development server:
+   ```bash
    npm run dev
-
-📂 Folder Structure
-.
-├── app/ # Next.js App Router pages & API routes
-├── components/ # Reusable UI components
-├── lib/ # Utility functions (e.g., auth checks, db connect)
-├── models/ # Mongoose models (Schemas)
-├── middleware.ts # Middleware for role/permission checks
-├── public/ # Static assets
-├── styles/ # Global styles
-└── README.md
+   ```
