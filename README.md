@@ -1,4 +1,4 @@
-# Role-Based CRUD (Next.js + MongoDB (with mongoose) + TypeScript + Tailwind)
+# Role-Based CRUD (Next.js + MongoDB + TypeScript + Tailwind)
 
 A role & permission-based CRUD system built with **Next.js 14**, **TypeScript**, **MongoDB**, and **TailwindCSS**.  
 It includes authentication, user management, role & permission assignment, and protected routes using Next.js middleware.
