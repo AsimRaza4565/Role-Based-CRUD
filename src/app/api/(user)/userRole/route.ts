@@ -20,7 +20,6 @@ export async function POST(req: Request) {
       userId: userId,
       roleId: { $nin: uniqueRoleIds },
     });
-    console.log("deleteResult", deleteResult);
 
     if (uniqueRoleIds.length === 0) {
       return NextResponse.json(

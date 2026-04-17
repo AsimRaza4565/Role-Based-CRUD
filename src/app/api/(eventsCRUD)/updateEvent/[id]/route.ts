@@ -34,7 +34,6 @@ export async function PUT(
       { description: description },
       { new: true }
     );
-    console.log("updatedEvent", updatedEvent);
 
     if (!updatedEvent) {
       return NextResponse.json({ error: "Event not found" }, { status: 404 });

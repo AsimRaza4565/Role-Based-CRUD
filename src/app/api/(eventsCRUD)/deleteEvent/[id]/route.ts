@@ -12,7 +12,6 @@ export async function DELETE(
     const { id } = await context.params;
 
     const deletedEvent = await Event.findByIdAndDelete(id);
-    // console.log("deletedEvent", deletedEvent);
 
     if (!deletedEvent) {
       return NextResponse.json({ error: "Event not found" }, { status: 404 });

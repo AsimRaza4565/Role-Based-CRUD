@@ -32,7 +32,6 @@ export async function DELETE(
     await RolePermission.deleteMany({ roleId: id });
 
     // const deletedRole = await Role.findByIdAndDelete(id);
-    // console.log("deletedRole", deletedRole);
     await Role.findByIdAndDelete(id);
 
     return NextResponse.json({

@@ -2,12 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import { Eye, EyeOff } from "lucide-react";
 
 type RoleOption = { _id: string; name: string; slug: string };
 
 export default function CreateUesr() {
+  const { data: session } = useSession();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,11 +19,25 @@ export default function CreateUesr() {
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [roleError, setRoleError] = useState("");
 
   const router = useRouter();
+  const canAssignRole =
+    !!session?.user &&
+    (
+      session.user.roles?.includes("roles-manager") ||
+      session.user.permissions?.includes("role-read") ||
+      session.user.permissions?.includes("role-create") ||
+      session.user.permissions?.includes("role-update") ||
+      session.user.permissions?.includes("role-delete")
+    );
 
   useEffect(() => {
+    if (!canAssignRole) {
+      setRoles([]);
+      setRoleId("");
+      return;
+    }
+
     (async () => {
       try {
         const res = await fetch("/api/roles");
@@ -30,10 +46,9 @@ export default function CreateUesr() {
         setRoles(data);
       } catch (err) {
         console.error(err);
-        setRoleError("Can't load roles");
       }
     })();
-  }, []);
+  }, [canAssignRole]);
 
   const validateEmail = (value: string): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -75,14 +90,12 @@ export default function CreateUesr() {
       setNameError("Name is required!");
       setEmailError("");
       setPasswordError("");
-      setRoleError("");
       return;
     }
     if (!email) {
       setEmailError("Email is required!");
       setNameError("");
       setPasswordError("");
-      setRoleError("");
 
       return;
     }
@@ -90,16 +103,7 @@ export default function CreateUesr() {
       setPasswordError("Password is required!");
       setNameError("");
       setEmailError("");
-      setRoleError("");
 
-      return;
-    }
-
-    if (!roleId) {
-      setRoleError("Roll is required!");
-      setNameError("");
-      setEmailError("");
-      setPassword("");
       return;
     }
 
@@ -143,7 +147,7 @@ export default function CreateUesr() {
       const response = await fetch("/api/createUser", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password, roleId }),
+        body: JSON.stringify({ name, email, password, roleId: roleId || undefined }),
       });
 
       if (response.ok) {
@@ -246,30 +250,33 @@ export default function CreateUesr() {
               )}
             </div>
 
-            <div>
-              <label htmlFor="role" className="block text-sm font-medium text-slate-700">
-                Role
-              </label>
-              <div className="mt-1">
-                <select
-                  id="role"
-                  name="role"
-                  value={roleId}
-                  onChange={(e) => setRoleId(e.target.value)}
-                  className="appearance-none block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm bg-white text-slate-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all cursor-pointer"
-                >
-                  <option value="">Select a role</option>
-                  {roles.map((role) => (
-                    <option key={role._id} value={role._id}>
-                      {role.name}
-                    </option>
-                  ))}
-                </select>
+            {canAssignRole ? (
+              <div>
+                <label htmlFor="role" className="block text-sm font-medium text-slate-700">
+                  Role <span className="text-slate-400 font-normal">(optional)</span>
+                </label>
+                <div className="mt-1">
+                  <select
+                    id="role"
+                    name="role"
+                    value={roleId}
+                    onChange={(e) => setRoleId(e.target.value)}
+                    className="appearance-none block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm bg-white text-slate-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all cursor-pointer"
+                  >
+                    <option value="">Select a role</option>
+                    {roles.map((role) => (
+                      <option key={role._id} value={role._id}>
+                        {role.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
-              {roleError && (
-                <p className="mt-2 text-sm text-rose-600 font-medium">{roleError}</p>
-              )}
-            </div>
+            ) : (
+              <div className="rounded-md border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-600">
+                A default role will be assigned automatically.
+              </div>
+            )}
 
             <div className="pt-2">
               <button

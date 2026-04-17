@@ -21,7 +21,6 @@ export default function Permission() {
       try {
         const res = await fetch("api/permissions");
         const data = await res.json();
-        // console.log("data:", data);
         setPermissions(data);
       } catch (error) {
         console.error("Error fetching Permissions:", error);
@@ -37,6 +36,9 @@ export default function Permission() {
       });
 
       if (response.ok) {
+        setPermissions((prev) =>
+          prev.filter((permission) => permission._id !== permissionId)
+        );
         toast.success("Permission deleted");
       } else {
         await response.json();

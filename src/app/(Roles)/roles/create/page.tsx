@@ -108,7 +108,7 @@ export default function CreateRole() {
                 />
               </div>
               <p className="mt-2 text-xs text-slate-500">
-                A unique machine-readable identifier automatically generated from the name unless edited.
+                A unique identifier automatically generated from the name unless edited.
               </p>
             </div>
 

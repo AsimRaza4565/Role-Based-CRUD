@@ -12,7 +12,6 @@ export async function DELETE(
     const { id } = await context.params;
 
     const deletedPermission = await Permission.findByIdAndDelete(id);
-    // console.log("deletedPermission", deletedPermission);
 
     if (!deletedPermission) {
       return NextResponse.json(

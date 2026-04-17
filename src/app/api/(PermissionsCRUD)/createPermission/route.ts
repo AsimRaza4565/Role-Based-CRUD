@@ -4,7 +4,6 @@ import Permission from "../../../../models/permission";
 export async function POST(request: Request) {
   try {
     await connectDatabase();
-    // console.log("Database Connected")
     const { name, slug } = await request.json();
 
     if (!name || !slug) {
@@ -22,7 +21,6 @@ export async function POST(request: Request) {
     }
 
     // const Permission = await Permission.create({ name });
-    // console.log(Permission);
     await Permission.create({ name, slug });
     return NextResponse.json(
       { message: "Permission created" },

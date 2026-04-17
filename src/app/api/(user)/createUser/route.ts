@@ -11,7 +11,7 @@ export async function POST(request: Request) {
 
     const { name, email, password, roleId } = await request.json();
 
-    if (!name || !email || !password || !roleId) {
+    if (!name || !email || !password) {
       return NextResponse.json(
         { error: "Please fill all fields" },
         { status: 400 }
@@ -31,11 +31,17 @@ export async function POST(request: Request) {
 
     const user = await User.create({ name, email, password: hashedPassword });
 
-    // Assigning role
-    const role = await Role.findById(roleId);
+    const totalUsers = await User.countDocuments();
+
+    // Assigning explicit role when available, otherwise defaulting like signup
+    const resolvedRole = roleId
+      ? await Role.findById(roleId)
+      : await Role.findOne({ name: totalUsers === 1 ? "admin" : "viewer" });
+
+    const role = resolvedRole;
     if (!role) {
       return NextResponse.json(
-        { error: "Invalid role provided" },
+        { error: roleId ? "Invalid role provided" : "Default role not found" },
         { status: 400 }
       );
     }

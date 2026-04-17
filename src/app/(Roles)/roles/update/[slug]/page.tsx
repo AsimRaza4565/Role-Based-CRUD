@@ -8,7 +8,6 @@ import { toast } from "react-toastify";
 export default function UpdateRole() {
   const router = useRouter();
   const { slug } = useParams();
-  // console.log("slug", slug);
 
   const [roleName, setRoleName] = useState("");
   const [roleId, setRoleId] = useState("");
@@ -39,7 +38,6 @@ export default function UpdateRole() {
         setRoleId(data._id);
         setSlugState(data.slug);
       }
-      // console.log("Role Name", roleName);
     }
     fetchRole();
   }, [slug]);
@@ -119,7 +117,7 @@ export default function UpdateRole() {
                 />
               </div>
               <p className="mt-2 text-xs text-slate-500">
-                A unique machine-readable identifier automatically generated from the name unless edited.
+                A unique identifier automatically generated from the name unless edited.
               </p>
             </div>
 

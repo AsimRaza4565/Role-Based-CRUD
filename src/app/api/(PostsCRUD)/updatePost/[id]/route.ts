@@ -35,7 +35,6 @@ export async function PUT(
       { title: title, content: content },
       { new: true }
     );
-    console.log("updatedPost", updatedPost);
 
     if (!updatedPost) {
       return NextResponse.json({ error: "Post not found" }, { status: 404 });

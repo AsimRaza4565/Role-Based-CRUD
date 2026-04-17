@@ -5,7 +5,6 @@ import Post from "../../../../models/post";
 export async function POST(request: Request) {
   try {
     await connectDatabase();
-    // console.log("Database Connected")
     const { title, content } = await request.json();
 
     if (!title) {
@@ -23,7 +22,6 @@ export async function POST(request: Request) {
     // }
 
     // const post = await Post.create({ title });
-    // console.log(post);
     await Post.create({ title, content });
     return NextResponse.json({ message: "Post created" }, { status: 201 });
   } catch (error) {

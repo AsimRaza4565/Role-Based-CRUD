@@ -10,7 +10,6 @@ export async function GET(
     await connectDatabase;
     const { slug } = await params;
     const role = await Role.findOne({ slug });
-    // console.log("role", role);
 
     if (!role) {
       return NextResponse.json({ error: "Role not found" }, { status: 404 });

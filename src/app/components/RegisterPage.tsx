@@ -122,10 +122,9 @@ export default function RegisterPage() {
         router.push("/");
         toast.success("Successfully Registered");
       } else {
-        console.log("Registration failed!");
       }
     } catch (error) {
-      console.log("Error during registration: ", error);
+      console.error("Error during registration: ", error);
     }
   };
 

@@ -34,7 +34,6 @@ export async function PUT(
       { name: name, slug: slug },
       { new: true }
     );
-    // console.log("updatedPermission", updatedPermission);
 
     if (!updatedPermission) {
       return NextResponse.json(

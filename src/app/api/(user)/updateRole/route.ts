@@ -21,7 +21,6 @@ export async function POST(request: Request) {
       userId: userId,
       roleId: { $nin: uniqueRoleIds }, //deleting roles that are not in new list
     });
-    // console.log(deleteResult);
 
     if (uniqueRoleIds.length === 0) {
       return NextResponse.json({ message: "No Roles" }, { status: 200 });

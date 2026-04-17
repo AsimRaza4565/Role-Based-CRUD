@@ -13,7 +13,6 @@ export async function GET(
     const { id } = await context.params;
 
     const userRoles = await UserRole.find({ userId: id }).populate("roleId");
-    // console.log("UserRoles", userRoles);
 
     if (!userRoles || userRoles.length === 0) {
       return NextResponse.json({ error: "User has no role" }, { status: 404 });

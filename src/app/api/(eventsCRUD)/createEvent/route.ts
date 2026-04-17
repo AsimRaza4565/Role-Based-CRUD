@@ -5,7 +5,6 @@ import Event from "../../../../models/event";
 export async function POST(request: Request) {
   try {
     await connectDatabase();
-    // console.log("Database Connected")
     const { description } = await request.json();
 
     if (!description) {
@@ -25,7 +24,6 @@ export async function POST(request: Request) {
     // }
 
     // const event = await Event.create({ description });
-    // console.log(event);
     await Event.create({ description });
     return NextResponse.json({ message: "Event created" }, { status: 201 });
   } catch (error) {

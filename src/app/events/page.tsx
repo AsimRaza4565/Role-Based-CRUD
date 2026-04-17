@@ -15,14 +15,12 @@ export default function Events() {
   const [events, setEvents] = useState<Event[]>([]);
 
   const { data: session } = useSession();
-  // console.log("permissions", session?.user?.permissions);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const eventsData = await fetch("api/events");
         setEvents(await eventsData.json());
-        console.log("eventsData", eventsData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -37,6 +35,7 @@ export default function Events() {
       });
 
       if (response.ok) {
+        setEvents((prev) => prev.filter((event) => event._id !== eventId));
         toast.success("Event deleted");
       } else {
         await response.json();

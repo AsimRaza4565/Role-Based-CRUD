@@ -45,11 +45,9 @@ export default function AssignRoles() {
     const fetchUserRoles = async () => {
       try {
         const res = await fetch(`/api/userRole/${selectedUser._id}`);
-        // console.log("User Id:", selectedUser._id);
 
         if (res.ok) {
           const data = await res.json();
-          // console.log("Data:", data);
 
           let userRoleIds; //or userRoleIds = []
 
@@ -65,7 +63,6 @@ export default function AssignRoles() {
 
           setSelectedRoles(userRoleIds);
           setOriginalRoles(userRoleIds);
-          // console.log("User Roles:", userRoleIds);
         } else {
           setSelectedRoles([]);
           setOriginalRoles([]);
@@ -109,7 +106,6 @@ export default function AssignRoles() {
 
       if (response.ok) {
         const result = await response.json();
-        console.log("Update successful:", result);
         setOriginalRoles([...selectedRoles]);
         toast.success("Roles updated successfully!");
       } else {
@@ -137,9 +133,9 @@ export default function AssignRoles() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Users list - Master View */}
-          <div className="lg:col-span-2 flex flex-col">
+          <div className="flex flex-col">
             <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden flex-1">
               <div className="px-6 py-4 border-b border-slate-200 bg-slate-50/50">
                 <h2 className="text-lg font-semibold text-slate-800">User Directory</h2>
@@ -173,7 +169,7 @@ export default function AssignRoles() {
           </div>
 
           {/* Roles config - Detail View */}
-          <div className="lg:col-span-1 flex flex-col">
+          <div className="flex flex-col">
             <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden sticky top-24">
               <div className="px-6 py-4 border-b border-slate-200 bg-slate-50/50">
                 <h2 className="text-lg font-semibold text-slate-800">Assigned Roles</h2>
@@ -196,7 +192,7 @@ export default function AssignRoles() {
                       Managing roles for <span className="font-semibold text-slate-900">{selectedUser.name}</span>
                     </p>
                     <div className="mb-6 max-h-[300px] overflow-y-auto pr-2">
-                      <ul className="space-y-3">
+                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         {roles.map((role) => (
                           <li key={role._id}>
                             <label className="flex items-center gap-3 cursor-pointer p-2 rounded-lg hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">

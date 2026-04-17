@@ -12,7 +12,6 @@ export async function DELETE(
     const { id } = await context.params;
 
     const deletedPost = await Post.findByIdAndDelete(id);
-    // console.log("deletedPost", deletedPost);
 
     if (!deletedPost) {
       return NextResponse.json({ error: "Post not found" }, { status: 404 });

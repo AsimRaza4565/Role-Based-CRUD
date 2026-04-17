@@ -10,10 +10,8 @@ export async function GET(
   try {
     await connectDatabase();
     const { id } = await params;
-    // console.log("id: ", id);
 
     const user = await User.findOne({ _id: id });
-    // console.log("user", user);
 
     if (!user) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
@@ -29,7 +27,6 @@ export async function GET(
         slug: userRole.roleId.slug,
       };
     }
-    // console.log("roleId", roleData._id);
 
     // Returning all data
     return NextResponse.json({

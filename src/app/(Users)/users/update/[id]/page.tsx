@@ -10,7 +10,6 @@ type RoleOption = { _id: string; name: string; slug: string };
 export default function EditUser() {
   const router = useRouter();
   const { id } = useParams();
-  // console.log("id", id);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -42,15 +41,11 @@ export default function EditUser() {
       const res = await fetch(`/api/users/${id}`);
       if (res.ok) {
         const data = await res.json();
-        // console.log("data", data);
 
         setName(data.name);
         setEmail(data.email);
         setRole(data.roleId || "");
         // setPassword(data.password);
-        // console.log("name", name);
-        // console.log("Email", email);
-        // console.log("Password", password);
       }
     }
     fetchData();

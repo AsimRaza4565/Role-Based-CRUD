@@ -8,7 +8,6 @@ import { toast } from "react-toastify";
 export default function UpdatePermission() {
   const router = useRouter();
   const { slug } = useParams();
-  console.log("slug", slug);
 
   const [permissionName, setPermissionName] = useState("");
   const [permissionId, setPermissionId] = useState("");
@@ -39,7 +38,6 @@ export default function UpdatePermission() {
         setPermissionId(data._id);
         setSlugState(data.slug);
       }
-      // console.log("Permission Name:", permissionName);
     }
     fetchPermission();
   }, [slug]);
@@ -119,7 +117,7 @@ export default function UpdatePermission() {
                 />
               </div>
               <p className="mt-2 text-xs text-slate-500">
-                A unique machine-readable identifier automatically generated from the name unless edited.
+                A unique identifier automatically generated from the name unless edited.
               </p>
             </div>
 

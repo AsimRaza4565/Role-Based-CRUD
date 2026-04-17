@@ -5,7 +5,6 @@ import Role from "../../../../models/role";
 export async function POST(request: Request) {
   try {
     await connectDatabase();
-    // console.log("Database Connected")
     const { name, slug } = await request.json();
 
     if (!name) {
@@ -23,7 +22,6 @@ export async function POST(request: Request) {
     }
 
     // const role = await Role.create({ name });
-    // console.log(role);
     await Role.create({ name, slug });
     return NextResponse.json({ message: "Role created" }, { status: 201 });
   } catch (error) {

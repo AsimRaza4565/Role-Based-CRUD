@@ -14,7 +14,6 @@ interface Role {
 
 export default function Roles() {
   const { data: session } = useSession();
-  console.log("session", session);
 
   const [roles, setRoles] = useState<Role[]>([]);
   useEffect(() => {
@@ -22,7 +21,6 @@ export default function Roles() {
       try {
         const res = await fetch("api/roles");
         const data = await res.json();
-        // console.log("data:", data);
         setRoles(data);
       } catch (error) {
         console.error("Error fetching Roles:", error);
@@ -38,6 +36,7 @@ export default function Roles() {
       });
 
       if (response.ok) {
+        setRoles((prev) => prev.filter((role) => role._id !== roleId));
         toast.success("Role deleted");
       } else {
         await response.json();

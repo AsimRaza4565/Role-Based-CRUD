@@ -43,7 +43,6 @@ export async function PUT(
 
     // const updatedRole = await Role.findByIdAndUpdate(
     await Role.findByIdAndUpdate(id, { name: name, slug: slug }, { new: true });
-    // console.log("updatedRole", updatedRole);
 
     return NextResponse.json({
       message: "Role updated",

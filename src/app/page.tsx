@@ -5,7 +5,59 @@ import { authOptions } from "./api/auth/[...nextauth]/route";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
-  if (session) redirect("/posts");
+  if (session) {
+    const roles = session.user?.roles || [];
+    const permissions = session.user?.permissions || [];
+
+    if (
+      permissions.includes("post-read") ||
+      permissions.includes("post-create") ||
+      permissions.includes("post-update") ||
+      permissions.includes("post-delete")
+    ) {
+      redirect("/posts");
+    }
+
+    if (
+      permissions.includes("event-read") ||
+      permissions.includes("event-create") ||
+      permissions.includes("event-update") ||
+      permissions.includes("event-delete")
+    ) {
+      redirect("/events");
+    }
+
+    if (
+      permissions.includes("user-read") ||
+      permissions.includes("user-create") ||
+      permissions.includes("user-update") ||
+      permissions.includes("user-delete")
+    ) {
+      redirect("/users");
+    }
+
+    if (
+      permissions.includes("role-read") ||
+      permissions.includes("role-create") ||
+      permissions.includes("role-update") ||
+      permissions.includes("role-delete") ||
+      roles.includes("roles-manager")
+    ) {
+      redirect("/roles");
+    }
+
+    if (
+      permissions.includes("permission-read") ||
+      permissions.includes("permission-create") ||
+      permissions.includes("permission-update") ||
+      permissions.includes("permission-delete") ||
+      roles.includes("permissions-manager")
+    ) {
+      redirect("/permissions");
+    }
+
+    redirect("/");
+  }
 
   return <LoginPage />;
 }

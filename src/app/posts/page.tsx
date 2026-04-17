@@ -16,14 +16,12 @@ export default function Posts() {
   const [posts, setPosts] = useState<Post[]>([]);
 
   const { data: session } = useSession();
-  // console.log("permissions", session?.user?.permissions);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const postsData = await fetch("api/posts");
         setPosts(await postsData.json());
-        console.log("postsData", postsData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -38,6 +36,7 @@ export default function Posts() {
       });
 
       if (response.ok) {
+        setPosts((prev) => prev.filter((post) => post._id !== postId));
         toast.success("Post deleted");
       } else {
         await response.json();
@@ -84,7 +83,7 @@ export default function Posts() {
             <p className="mt-1 text-sm text-slate-500">Get started by creating a new post.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {posts.map((post) => (
               <div
                 key={post._id}

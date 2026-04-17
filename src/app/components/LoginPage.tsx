@@ -73,14 +73,15 @@ export default function LoginPage() {
         const session = await getSession();
         const roles = session?.user?.roles || [];
         const permissions = session?.user?.permissions || [];
-        // console.log("roles", roles);
-        // console.log("permissions", permissions);
 
         if (permissions.includes("post-read")) {
           router.push("/posts");
         } else if (permissions.includes("event-read")) {
           router.push("/events");
+        } else if (permissions.includes("user-read")) {
+          router.push("/users");
         } else if (
+          permissions.includes("role-read") ||
           permissions.includes("role-create") ||
           permissions.includes("role-update") ||
           permissions.includes("role-delete") ||
@@ -88,6 +89,7 @@ export default function LoginPage() {
         ) {
           router.push("/roles");
         } else if (
+          permissions.includes("permission-read") ||
           permissions.includes("permission-create") ||
           permissions.includes("permission-update") ||
           permissions.includes("permission-delete") ||
@@ -104,7 +106,7 @@ export default function LoginPage() {
       }
       // setError(res.error); // displaying API message
     } catch (error) {
-      console.log("Error:", error);
+      console.error("Error:", error);
       toast.error("Something went wrong while signup");
     }
   };

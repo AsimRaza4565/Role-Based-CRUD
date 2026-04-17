@@ -8,6 +8,7 @@ import UserRole from "../../../../models/userRole";
 import RolePermission from "../../../../models/rolePermission";
 import Role from "../../../../models/role";
 import Permission from "../../../../models/permission";
+import { ensureDefaultPermissions } from "../../../../lib/defaultPermissions";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -15,11 +16,14 @@ export const authOptions: NextAuthOptions = {
       name: "credentials",
       credentials: {},
 
-      async authorize(credentials) {
+      async authorize(credentials: Record<string, string> | undefined) {
         if (!credentials?.email || !credentials?.password) {
           throw new Error("Email and password are required");
         }
-        const { email, password } = credentials;
+        const { email, password } = credentials as {
+          email: string;
+          password: string;
+        };
         try {
           await connectDatabase();
 
@@ -54,12 +58,13 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
+        await ensureDefaultPermissions();
+
         // Geting user's roles
         const userRoles = await UserRole.find({ userId: user.id }).populate({
           path: "roleId",
           model: Role,
         });
-        // console.log("userRoles", userRoles);
 
         // Collecting role slug
         const roles = userRoles.map((ur) => ur.roleId.slug);
@@ -73,7 +78,6 @@ export const authOptions: NextAuthOptions = {
           path: "permissionId",
           model: Permission,
         });
-        // console.log("rolePermissions", rolePermissions);
 
         // Getting unique permissions
         const permissions = [
@@ -89,13 +93,9 @@ export const authOptions: NextAuthOptions = {
 
     async session({ session, token }) {
       if (session?.user) {
-        // console.log(session?.user?.email);
-        // console.log("session", session);
       }
       session.user.roles = token.roles;
       session.user.permissions = token.permissions;
-      // console.log("Current User Roles", session.user.roles);
-      // console.log("Current User permissions", session.user.permissions);
 
       return session;
     },

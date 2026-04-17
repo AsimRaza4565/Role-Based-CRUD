@@ -15,7 +15,6 @@ export async function GET(
     const rolePermissions = await RolePermission.find({ roleId: id }).populate(
       "permissionId"
     );
-    // console.log("RolePermissions", rolePermissions);
 
     if (!rolePermissions || rolePermissions.length === 0) {
       return NextResponse.json(

@@ -8,12 +8,8 @@ import UserRole from "../../../../models/userRole";
 export async function POST(request: Request) {
   try {
     await connectDatabase();
-    // console.log("Database Connected");
 
     const { name, email, password } = await request.json();
-    // console.log("Name: ", name);
-    // console.log("Email: ", email);
-    // console.log("Password: ", password);
 
     if (!name || !email || !password) {
       return NextResponse.json(
@@ -37,8 +33,6 @@ export async function POST(request: Request) {
     const hashedPassword = await bcrypt.hash(password, 10);
     // Inserting to database
     const user = await User.create({ name, email, password: hashedPassword });
-    // console.log("user:", user);
-    // console.log("userId", user._id);
 
     let role;
     //Assigning admin role to first user
@@ -47,7 +41,6 @@ export async function POST(request: Request) {
     } else {
       role = await Role.findOne({ name: "viewer" });
     }
-    // console.log("role", role);
 
     const userRole = await UserRole.create({
       userId: user._id,
@@ -57,7 +50,6 @@ export async function POST(request: Request) {
     if (!userRole) {
       NextResponse.json({ error: "You have No Role" }, { status: 303 });
     }
-    // console.log("UserRole", userRole);
 
     return NextResponse.json({ message: "User registered" }, { status: 201 });
   } catch (error) {

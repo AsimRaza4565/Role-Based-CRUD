@@ -24,6 +24,34 @@ export default function AssignRoles() {
   const [originalPermissions, setOriginalPermissions] = useState<string[]>([]);
   const [isUpdating, setIsUpdating] = useState(false);
 
+  const ensureReadPermissions = (permissionIds: string[]) => {
+    const permissionMap = new Map(permissions.map((permission) => [permission._id, permission]));
+    const normalizedIds = new Set(permissionIds);
+    const requiredReadSlugs = new Set<string>();
+
+    permissionIds.forEach((permissionId) => {
+      const slug = permissionMap.get(permissionId)?.slug;
+      if (!slug || !slug.includes("-")) return;
+
+      const slugParts = slug.split("-");
+      const action = slugParts[slugParts.length - 1];
+      const resource = slugParts.slice(0, -1).join("-");
+
+      if (action !== "read") {
+        requiredReadSlugs.add(`${resource}-read`);
+      }
+    });
+
+    requiredReadSlugs.forEach((readSlug) => {
+      const readPermission = permissions.find((permission) => permission.slug === readSlug);
+      if (readPermission) {
+        normalizedIds.add(readPermission._id);
+      }
+    });
+
+    return Array.from(normalizedIds);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -45,11 +73,9 @@ export default function AssignRoles() {
     const fetchRolePermission = async () => {
       try {
         const res = await fetch(`/api/rolePermission/${selectedRole._id}`);
-        // console.log("Role Id:", selectedRole._id);
 
         if (res.ok) {
           const data = await res.json();
-          // console.log("Data:", data);
 
           let rolePermissionIds; //or rolePermissionIds = []
 
@@ -63,9 +89,9 @@ export default function AssignRoles() {
             rolePermissionIds = data.permissionIds;
           }
 
-          setSelectedPermissions(rolePermissionIds);
-          setOriginalPermissions(rolePermissionIds);
-          // console.log("Role Permissions:", rolePermissionIds);
+          const normalizedRolePermissionIds = ensureReadPermissions(rolePermissionIds || []);
+          setSelectedPermissions(normalizedRolePermissionIds);
+          setOriginalPermissions(normalizedRolePermissionIds);
         } else {
           setSelectedPermissions([]);
           setOriginalPermissions([]);
@@ -83,11 +109,15 @@ export default function AssignRoles() {
   // Handling role toggle
   const handlePermissionToggle = (roleId: string) => {
     setSelectedPermissions((prev) => {
+      let updatedPermissions: string[];
+
       if (prev.includes(roleId)) {
-        return prev.filter((id) => id !== roleId);
+        updatedPermissions = prev.filter((id) => id !== roleId);
       } else {
-        return [...prev, roleId];
+        updatedPermissions = [...prev, roleId];
       }
+
+      return ensureReadPermissions(updatedPermissions);
     });
   };
 
@@ -98,19 +128,21 @@ export default function AssignRoles() {
     setIsUpdating(true);
 
     try {
+      const normalizedPermissionIds = ensureReadPermissions(selectedPermissions);
+
       const response = await fetch("/api/rolePermission", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           roleId: selectedRole._id,
-          permissionIds: selectedPermissions,
+          permissionIds: normalizedPermissionIds,
         }),
       });
 
       if (response.ok) {
         const result = await response.json();
-        console.log("Update successful:", result);
-        setOriginalPermissions([...selectedPermissions]);
+        setSelectedPermissions(normalizedPermissionIds);
+        setOriginalPermissions([...normalizedPermissionIds]);
         toast.success("Permissions updated successfully!");
       } else {
         const error = await response.json();
@@ -137,7 +169,7 @@ export default function AssignRoles() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Roles list - Master View */}
           <div className="lg:col-span-1 flex flex-col">
             <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden flex-1">
@@ -170,7 +202,7 @@ export default function AssignRoles() {
           </div>
 
           {/* Permissions config - Detail View */}
-          <div className="lg:col-span-2 flex flex-col">
+          <div className="flex flex-col">
             <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden sticky top-24">
               <div className="px-6 py-4 border-b border-slate-200 bg-slate-50/50">
                 <h2 className="text-lg font-semibold text-slate-800">Assigned Permissions</h2>
@@ -192,10 +224,10 @@ export default function AssignRoles() {
                     <p className="text-sm text-slate-500 mb-4 pb-4 border-b border-slate-100">
                       Managing permissions for <span className="font-semibold text-slate-900">{selectedRole.name}</span>
                     </p>
-                    <div className="mb-6 max-h-[400px] gap-2 columns-1 sm:columns-2 pr-2">
-                      <ul className="space-y-3">
+                    <div className="mb-6 max-h-[400px] overflow-y-auto pr-2">
+                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         {permissions.map((permission) => (
-                          <li key={permission._id} className="break-inside-avoid">
+                          <li key={permission._id}>
                             <label className="flex items-center gap-3 cursor-pointer p-2 rounded-lg hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
                               <input
                                 type="checkbox"

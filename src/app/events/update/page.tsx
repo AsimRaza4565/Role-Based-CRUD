@@ -13,7 +13,6 @@ export default function UpdateEvent(props) {
   const [description, setDescription] = useState(
     searchParams.get("description") || ""
   );
-  console.log("description", description);
 
   const handleEventUpdate = async (e) => {
     e.preventDefault();

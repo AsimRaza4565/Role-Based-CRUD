@@ -19,7 +19,10 @@ export default function Navbar() {
               </span>
             </Link>
             <div className="hidden sm:-my-px sm:ml-8 sm:flex sm:space-x-8">
-              {session?.user?.roles?.includes("admin") && (
+              {(session?.user?.permissions?.includes("user-read") ||
+                session?.user?.permissions?.includes("user-create") ||
+                session?.user?.permissions?.includes("user-update") ||
+                session?.user?.permissions?.includes("user-delete")) && (
                 <Link
                   href={"/users"}
                   className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors ${
@@ -58,8 +61,12 @@ export default function Navbar() {
                 </Link>
               )}
 
-              {(session?.user?.roles?.includes("admin") ||
-                session?.user?.roles?.includes("roles-manager")) && (
+              {(session?.user?.permissions?.includes("role-read") ||
+                session?.user?.permissions?.includes("role-create") ||
+                session?.user?.permissions?.includes("role-update") ||
+                session?.user?.permissions?.includes("role-delete") ||
+                session?.user?.roles?.includes("roles-manager") ||
+                session?.user?.roles?.includes("admin")) && (
                 <Link
                   href={"/roles"}
                   className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors ${
@@ -85,8 +92,12 @@ export default function Navbar() {
                 </Link>
               )}
 
-              {(session?.user?.roles?.includes("admin") ||
-                session?.user?.roles?.includes("permissions-manager")) && (
+              {(session?.user?.permissions?.includes("permission-read") ||
+                session?.user?.permissions?.includes("permission-create") ||
+                session?.user?.permissions?.includes("permission-update") ||
+                session?.user?.permissions?.includes("permission-delete") ||
+                session?.user?.roles?.includes("permissions-manager") ||
+                session?.user?.roles?.includes("admin")) && (
                 <Link
                   href={"/permissions"}
                   className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors ${

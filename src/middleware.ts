@@ -5,7 +5,6 @@ import { withPermission } from "./lib/authChecks";
 export async function middleware(req: NextRequest) {
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
   const { pathname } = new URL(req.url);
-  // console.log("token data", token);
 
   // Allowing these routes without token
   if (
@@ -44,6 +43,7 @@ export async function middleware(req: NextRequest) {
   }
   if (pathname.startsWith("/api/users") || pathname.startsWith("/users")) {
     const check = withPermission(token, [
+      "user-read",
       "user-create",
       "user-update",
       "user-delete",
@@ -107,10 +107,10 @@ export async function middleware(req: NextRequest) {
   }
   if (pathname.startsWith("/api/events") || pathname.startsWith("/events")) {
     const check = withPermission(token, [
-      "events-create",
+      "event-create",
       "event-read",
-      "events-update",
-      "events-delete",
+      "event-update",
+      "event-delete",
     ]);
     if (check) return check;
   }
@@ -138,6 +138,7 @@ export async function middleware(req: NextRequest) {
   }
   if (pathname.startsWith("/api/roles") || pathname.startsWith("/roles")) {
     const check = withPermission(token, [
+      "role-read",
       "role-create",
       "role-update",
       "role-delete",
@@ -172,6 +173,7 @@ export async function middleware(req: NextRequest) {
     pathname.startsWith("/permissions")
   ) {
     const check = withPermission(token, [
+      "permission-read",
       "permission-create",
       "permission-update",
       "permission-delete",
