@@ -5,7 +5,7 @@ import UserRole from "../../../../../models/userRole";
 
 export async function DELETE(
   request: Request,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   await connectDatabase();
 

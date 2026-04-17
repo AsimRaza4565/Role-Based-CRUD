@@ -4,7 +4,7 @@ import Role from "../../../../../models/role";
 
 export async function PUT(
   request: Request,
-  context: { params: { id: string; slug: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   await connectDatabase();
 

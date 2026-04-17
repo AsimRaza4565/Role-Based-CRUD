@@ -8,7 +8,7 @@ import { error } from "console";
 
 export async function PUT(
   request: Request,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   await connectDatabase();
 

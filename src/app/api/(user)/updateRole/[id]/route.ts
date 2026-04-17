@@ -5,7 +5,7 @@ import UserRole from "../../../../../models/userRole";
 // Getting user and their roles
 export async function GET(
   request: Request,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   await connectDatabase();
 

@@ -4,7 +4,7 @@ import Event from "../../../../../models/event";
 
 export async function PUT(
   request: Request,
-  context: { params: { id: string; description: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   await connectDatabase();
 

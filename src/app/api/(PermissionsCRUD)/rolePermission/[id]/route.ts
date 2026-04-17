@@ -4,7 +4,7 @@ import RolePermission from "../../../../../models/rolePermission";
 
 export async function GET(
   request: Request,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   await connectDatabase();
 

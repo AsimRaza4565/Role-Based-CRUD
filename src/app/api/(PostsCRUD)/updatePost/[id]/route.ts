@@ -4,12 +4,12 @@ import Post from "../../../../../models/post";
 
 export async function PUT(
   request: Request,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   await connectDatabase();
 
   try {
-    const { id } = context.params;
+    const { id } = await context.params;
     const { title, content } = await request.json();
 
     if (!title || !content) {

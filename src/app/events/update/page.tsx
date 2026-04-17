@@ -1,11 +1,12 @@
 "use client";
 
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-export default function UpdateEvent(props) {
+function UpdateEventContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -93,5 +94,13 @@ export default function UpdateEvent(props) {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function UpdateEvent() {
+  return (
+    <Suspense fallback={null}>
+      <UpdateEventContent />
+    </Suspense>
   );
 }

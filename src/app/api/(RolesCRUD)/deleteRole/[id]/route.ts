@@ -6,7 +6,7 @@ import RolePermission from "../../../../../models/rolePermission";
 
 export async function DELETE(
   request: Request,
-  context: { params: { id: string; name: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   await connectDatabase();
 
