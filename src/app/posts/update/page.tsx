@@ -26,8 +26,8 @@ export default function UpdatePost(props) {
 
       if (response.ok) {
         toast.success("Post updated");
+        router.push("/posts");
       } else {
-        // const error = await response.json();
         await response.json();
         toast.error("Failed to update post");
       }
@@ -37,53 +37,78 @@ export default function UpdatePost(props) {
   };
 
   return (
-    <div className="h-screen flex items-center">
-      <form
-        onSubmit={handlePostUpdate}
-        className="flex flex-col gap-3 w-md mx-auto border rounded border-gray-500 px-5 py-7"
-      >
-        <h2 className="font-medium text-center text-2xl">Update Post</h2>
-        <hr />
-        <div className="flex flex-col">
-          <label htmlFor="updatePost" className="font-medium mt-3 mb-2">
-            Title
-          </label>
-          <input
-            title="Update Post"
-            type="text"
-            id="updatePost"
-            placeholder={postTitle}
-            className="border p-2 rounded"
-            value={postTitle}
-            onChange={(e) => setPostTitle(e.target.value)}
-            required
-          />
+    <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+      <div className="sm:mx-auto sm:w-full sm:max-w-md">
+        <h2 className="mt-6 text-center text-3xl font-extrabold text-slate-900">
+          Update Post
+        </h2>
+        <p className="mt-2 text-center text-sm text-slate-600">
+          Edit and modify your published post
+        </p>
+      </div>
+
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 border border-slate-200">
+          <form onSubmit={handlePostUpdate} className="space-y-6" noValidate>
+            
+            <div>
+              <label htmlFor="updatePost" className="block text-sm font-medium text-slate-700">
+                Title
+              </label>
+              <div className="mt-1">
+                <input
+                  id="updatePost"
+                  name="updatePost"
+                  type="text"
+                  required
+                  placeholder="Enter Post Title"
+                  value={postTitle}
+                  onChange={(e) => setPostTitle(e.target.value)}
+                  className="appearance-none block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm placeholder-slate-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm transition-all"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="updateContent" className="block text-sm font-medium text-slate-700">
+                Content
+              </label>
+              <div className="mt-1">
+                <textarea
+                  id="updateContent"
+                  name="updateContent"
+                  rows={6}
+                  required
+                  placeholder="Write your post content here..."
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                  className="appearance-none block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm placeholder-slate-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm transition-all resize-none"
+                />
+              </div>
+            </div>
+
+            <div className="pt-2">
+              <button
+                type="submit"
+                disabled={!postTitle || !content}
+                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Save Changes
+              </button>
+            </div>
+            
+            <div className="pt-2 text-center">
+              <button
+                type="button"
+                onClick={() => router.back()}
+                className="text-sm font-medium text-slate-500 hover:text-slate-700 transition-colors"
+              >
+                Cancel and return
+              </button>
+            </div>
+          </form>
         </div>
-        <div className="flex flex-col">
-          <label htmlFor="updateSlug" className="font-medium mb-2">
-            Content
-          </label>
-          <textarea
-            title="Update Content"
-            id="updateContent"
-            placeholder={content}
-            className="border p-2 rounded"
-            value={content}
-            onChange={(e) => {
-              setContent(e.target.value);
-            }}
-            required
-          />
-        </div>
-        <button
-          type="submit"
-          disabled={!postTitle || !content}
-          onClick={() => router.back()}
-          className="p-2 bg-yellow-500 hover:bg-yellow-600 rounded cursor-pointer mt-3"
-        >
-          Update
-        </button>
-      </form>
+      </div>
     </div>
   );
 }

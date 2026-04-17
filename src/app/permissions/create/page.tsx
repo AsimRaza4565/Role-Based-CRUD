@@ -56,46 +56,84 @@ export default function CreatePermission() {
   };
 
   return (
-    <div className="h-screen flex items-center">
-      <form
-        onSubmit={handlePermissionCreate}
-        className="flex flex-col gap-3 w-md mx-auto border rounded border-gray-500 px-5 py-7"
-      >
-        <h2 className="font-medium text-center text-2xl">
-          Create new Permission
+    <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+      <div className="sm:mx-auto sm:w-full sm:max-w-md">
+        <h2 className="mt-6 text-center text-3xl font-extrabold text-slate-900">
+          Create New Permission
         </h2>
-        <input
-          title="CreatePermission"
-          type="text"
-          id="createPermission"
-          placeholder="Enter Permission Name"
-          className="border p-2 rounded"
-          value={permissionName}
-          onChange={(e) => setPermissionName(e.target.value)}
-          required
-        />
-        <input
-          title="CreateSlug"
-          type="text"
-          id="CreateSlug"
-          placeholder="Slug"
-          className="border p-2 rounded"
-          value={slug}
-          onChange={(e) => {
-            setSlug(slugify(e.target.value));
-            setSlugEdited(true); //manually edited
-          }}
-          required
-        />
-        <button
-          type="submit"
-          disabled={!permissionName || isCreating}
-          onClick={() => router.back()}
-          className="p-2 bg-blue-500 hover:bg-blue-600 rounded cursor-pointer"
-        >
-          Create
-        </button>
-      </form>
+        <p className="mt-2 text-center text-sm text-slate-600">
+          Define a granular access level within the system
+        </p>
+      </div>
+
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 border border-slate-200">
+          <form onSubmit={handlePermissionCreate} className="space-y-6" noValidate>
+            
+            <div>
+              <label htmlFor="permissionName" className="block text-sm font-medium text-slate-700">
+                Permission Name
+              </label>
+              <div className="mt-1">
+                <input
+                  id="permissionName"
+                  name="permissionName"
+                  type="text"
+                  required
+                  placeholder="e.g. Read Users, Create Posts"
+                  value={permissionName}
+                  onChange={(e) => setPermissionName(e.target.value)}
+                  className="appearance-none block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm placeholder-slate-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="slug" className="block text-sm font-medium text-slate-700">
+                Permission Slug Identifier
+              </label>
+              <div className="mt-1">
+                <input
+                  id="slug"
+                  name="slug"
+                  type="text"
+                  required
+                  placeholder="e.g. read-users, create-posts"
+                  value={slug}
+                  onChange={(e) => {
+                    setSlug(slugify(e.target.value));
+                    setSlugEdited(true);
+                  }}
+                  className="appearance-none block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm placeholder-slate-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all bg-slate-50"
+                />
+              </div>
+              <p className="mt-2 text-xs text-slate-500">
+                A unique machine-readable identifier automatically generated from the name unless edited.
+              </p>
+            </div>
+
+            <div className="pt-2">
+              <button
+                type="submit"
+                disabled={!permissionName || !slug || isCreating}
+                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isCreating ? "Creating..." : "Create Permission"}
+              </button>
+            </div>
+            
+            <div className="pt-2 text-center">
+              <button
+                type="button"
+                onClick={() => router.back()}
+                className="text-sm font-medium text-slate-500 hover:text-slate-700 transition-colors"
+              >
+                Cancel and return
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }

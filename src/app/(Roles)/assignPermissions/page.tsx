@@ -126,85 +126,111 @@ export default function AssignRoles() {
   };
 
   return (
-    <div className="w-screen">
+    <div className="bg-slate-50 min-h-screen pb-12">
       <Navbar />
-      <div>
-        <div className="flex gap-3 items-center border-gray-500 rounded mx-28 my-3">
-          <span className="text-lg py-1 font-medium my-3 basis-8/12 text-center border border-gray-500 rounded">
-            ROLES
-          </span>
-          <span className="text-lg py-1 font-medium my-3 basis-4/12 text-center border border-gray-500 rounded">
-            PERMISSIONS
-          </span>
+
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+        <div className="mb-8">
+          <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">Assign Permissions</h1>
+          <p className="mt-2 text-sm text-slate-500">
+            Select a role to configure its access permissions.
+          </p>
         </div>
 
-        {/* Roles list */}
-        <div className="flex mx-28 gap-3">
-          <div className="border border-gray-500 rounded p-4 bg-gray-50 basis-8/12">
-            <ul className="flex flex-col gap-2">
-              {roles.map((role) => (
-                <li
-                  key={role._id}
-                  onClick={() => setSelectedRole(role)}
-                  className={`cursor-pointer p-3 rounded ${
-                    selectedRole?._id === role._id
-                      ? "bg-yellow-200 border-blue-300"
-                      : "bg-gray-200 hover:bg-gray-300"
-                  }`}
-                >
-                  <span className="font-medium">{role.name} </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Permissions list */}
-          <div className="border border-gray-500 rounded p-4 bg-gray-50 basis-4/12">
-            {!selectedRole ? (
-              <p className="text-gray-700 text-center font-bold">
-                Select a Role
-              </p>
-            ) : (
-              <div className="flex flex-col">
-                <div className="mb-4">
-                  <ul>
-                    {permissions.map((permission) => (
-                      <li key={permission._id}>
-                        <label className="flex items-center gap-3 cursor-pointer p-1 hover:bg-gray-100 rounded">
-                          <input
-                            type="checkbox"
-                            value={permission._id}
-                            checked={selectedPermissions.includes(
-                              permission._id
-                            )}
-                            onChange={() =>
-                              handlePermissionToggle(permission._id)
-                            }
-                            className="w-4 h-4"
-                          />
-                          <span>{permission.name}</span>
-                        </label>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <button
-                  onClick={handleRoleUpdate}
-                  disabled={isUpdating}
-                  className={`px-4 py-2 rounded border ${
-                    !isUpdating
-                      ? "bg-yellow-300 hover:bg-yellow-400 cursor-pointer border-yellow-400"
-                      : "bg-gray-300 text-gray-500 cursor-not-allowed border-gray-300"
-                  }`}
-                >
-                  {isUpdating ? "Updating..." : "Update Permissions"}
-                </button>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Roles list - Master View */}
+          <div className="lg:col-span-1 flex flex-col">
+            <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden flex-1">
+              <div className="px-6 py-4 border-b border-slate-200 bg-slate-50/50">
+                <h2 className="text-lg font-semibold text-slate-800">Role Directory</h2>
               </div>
-            )}
+              <ul className="divide-y divide-slate-100 max-h-[600px] overflow-y-auto">
+                {roles?.map((role) => {
+                  const isSelected = selectedRole?._id === role._id;
+                  return (
+                    <li
+                      key={role._id}
+                      onClick={() => setSelectedRole(role)}
+                      className={`cursor-pointer px-6 py-4 transition-all duration-200 ${
+                        isSelected
+                          ? "bg-indigo-50 border-l-4 border-indigo-600"
+                          : "hover:bg-slate-50 border-l-4 border-transparent"
+                      }`}
+                    >
+                      <div className="flex flex-col">
+                        <span className={`font-semibold ${isSelected ? 'text-indigo-900' : 'text-slate-900'}`}>
+                          {role.name}
+                        </span>
+                      </div>
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
+          </div>
+
+          {/* Permissions config - Detail View */}
+          <div className="lg:col-span-2 flex flex-col">
+            <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden sticky top-24">
+              <div className="px-6 py-4 border-b border-slate-200 bg-slate-50/50">
+                <h2 className="text-lg font-semibold text-slate-800">Assigned Permissions</h2>
+              </div>
+              
+              <div className="p-6">
+                {!selectedRole ? (
+                  <div className="text-center py-10">
+                    <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 mb-4">
+                      <svg className="h-6 w-6 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                      </svg>
+                    </div>
+                    <p className="text-sm font-medium text-slate-900">No Role Selected</p>
+                    <p className="text-sm text-slate-500 mt-1">Select a role to manage its permissions.</p>
+                  </div>
+                ) : (
+                  <div className="flex flex-col">
+                    <p className="text-sm text-slate-500 mb-4 pb-4 border-b border-slate-100">
+                      Managing permissions for <span className="font-semibold text-slate-900">{selectedRole.name}</span>
+                    </p>
+                    <div className="mb-6 max-h-[400px] gap-2 columns-1 sm:columns-2 pr-2">
+                      <ul className="space-y-3">
+                        {permissions.map((permission) => (
+                          <li key={permission._id} className="break-inside-avoid">
+                            <label className="flex items-center gap-3 cursor-pointer p-2 rounded-lg hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
+                              <input
+                                type="checkbox"
+                                value={permission._id}
+                                checked={selectedPermissions.includes(permission._id)}
+                                onChange={() => handlePermissionToggle(permission._id)}
+                                className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-slate-300 rounded cursor-pointer"
+                              />
+                              <span className="text-sm font-medium text-slate-700">{permission.name}</span>
+                            </label>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="pt-4 border-t border-slate-100">
+                      <button
+                        onClick={handleRoleUpdate}
+                        disabled={isUpdating}
+                        className={`w-full sm:w-auto px-6 py-2.5 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${
+                          !isUpdating
+                            ? "bg-indigo-600 hover:bg-indigo-700"
+                            : "bg-indigo-400 cursor-not-allowed"
+                        }`}
+                      >
+                        {isUpdating ? "Saving Changes..." : "Save Assignments"}
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 }

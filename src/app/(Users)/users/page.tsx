@@ -62,64 +62,86 @@ export default function UsersPage() {
   };
 
   return (
-    <>
+    <div className="bg-slate-50 min-h-screen pb-12">
       <Navbar />
-      <div className="flex px-7">
-        <Link href={"/users/create"}>
-          <button className="bg-blue-400 hover:bg-blue-500 border w-full p-2 rounded mt-3 mb-1 cursor-pointer">
-            Create New User
-          </button>
-        </Link>
-      </div>
-
-      <main className="px-7 items-center my-3">
-        <h1 className="text-center text-3xl font-bold mb-5">
-          Registered Users
-        </h1>
+      
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+        <div className="sm:flex sm:items-center sm:justify-between mb-8">
+          <div>
+            <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">Registered Users</h1>
+            <p className="mt-2 text-sm text-slate-500">
+              A list of all users in your system including their name, email, and actions.
+            </p>
+          </div>
+          <div className="mt-4 sm:mt-0">
+            <Link href={"/users/create"}>
+              <button className="inline-flex items-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">
+                <svg className="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fillRule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clipRule="evenodd" />
+                </svg>
+                Create New User
+              </button>
+            </Link>
+          </div>
+        </div>
 
         {users.length === 0 ? (
-          <p className="text-center text-gray-600">No users found</p>
+          <div className="text-center py-16 bg-white border border-slate-200 rounded-xl shadow-sm">
+            <svg className="mx-auto h-12 w-12 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+            <h3 className="mt-2 text-sm font-medium text-slate-900">No users found</h3>
+            <p className="mt-1 text-sm text-slate-500">Get started by creating a new user.</p>
+          </div>
         ) : (
-          <table className="w-full">
-            <thead>
-              <tr className="bg-green-200 border border-gray-500">
-                <th className="p-4 text-left border border-gray-500">Name</th>
-                <th className="p-4 text-left">Email</th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.map((user) => (
-                <tr
-                  key={user._id}
-                  className="bg-gray-100 border border-gray-500"
-                >
-                  <td className="px-4 py-2 border border-gray-500">
-                    {user.name}
-                  </td>
-                  <td className="px-4 py-2 flex justify-between items-center">
-                    {user.email}
-
-                    <div className="flex gap-2">
-                      <Link href={`/users/update/${user._id}`}>
-                        <button className="bg-yellow-500 text-sm p-2 rounded hover:bg-yellow-600 cursor-pointer text-white">
-                          Update
-                        </button>
-                      </Link>
-
-                      <button
-                        onClick={() => handleDeleteUser(user._id)}
-                        className="bg-red-500 text-sm p-2 rounded hover:bg-red-600 cursor-pointer text-white"
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="min-w-full divide-y divide-slate-200">
+                <thead className="bg-slate-50">
+                  <tr>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                      Name
+                    </th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                      Email
+                    </th>
+                    <th scope="col" className="relative px-6 py-3">
+                      <span className="sr-only">Actions</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-slate-200">
+                  {users.map((user) => (
+                    <tr key={user._id} className="hover:bg-slate-50 transition-colors">
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm font-medium text-slate-900">{user.name}</div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm text-slate-500">{user.email}</div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <div className="flex justify-end gap-3">
+                          <Link href={`/users/update/${user._id}`}>
+                            <button className="text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-3 py-1.5 rounded-md transition-colors border border-emerald-200">
+                              Update
+                            </button>
+                          </Link>
+                          <button
+                            onClick={() => handleDeleteUser(user._id)}
+                            className="text-rose-700 bg-rose-50 hover:bg-rose-100 px-3 py-1.5 rounded-md transition-colors border border-rose-200"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         )}
       </main>
-    </>
+    </div>
   );
 }

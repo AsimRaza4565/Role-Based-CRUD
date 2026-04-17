@@ -160,123 +160,138 @@ export default function CreateUesr() {
   };
 
   return (
-    <div className="h-screen flex items-center">
-      <form
-        onSubmit={handleUserCreate}
-        noValidate
-        className="flex flex-col gap-3 w-md mx-auto border rounded border-gray-500 px-5 py-3"
-      >
-        <h2 className="font-medium text-center text-2xl mb-3">
-          Create new User
+    <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+      <div className="sm:mx-auto sm:w-full sm:max-w-md">
+        <h2 className="mt-6 text-center text-3xl font-extrabold text-slate-900">
+          Create New User
         </h2>
+        <p className="mt-2 text-center text-sm text-slate-600">
+          Add a new member to your organization
+        </p>
+      </div>
 
-        <div className="flex flex-col gap-1">
-          <label htmlFor="username" className="font-medium text-lg">
-            Name
-          </label>
-          <input
-            title="User Name"
-            type="text"
-            id="username"
-            placeholder="Enter User's Name"
-            className="border p-2 rounded"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          {nameError && (
-            <div className="bg-red-600 text-white w-fit text-sm px-3 py-1 rounded mt-1">
-              {nameError}
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 border border-slate-200">
+          <form onSubmit={handleUserCreate} className="space-y-6" noValidate>
+            
+            <div>
+              <label htmlFor="username" className="block text-sm font-medium text-slate-700">
+                Name
+              </label>
+              <div className="mt-1">
+                <input
+                  id="username"
+                  name="username"
+                  type="text"
+                  required
+                  placeholder="Enter User's Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="appearance-none block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm placeholder-slate-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all"
+                />
+              </div>
+              {nameError && (
+                <p className="mt-2 text-sm text-rose-600 font-medium">{nameError}</p>
+              )}
             </div>
-          )}
-        </div>
 
-        <div className="flex flex-col gap-1">
-          <label htmlFor="email" className="font-medium text-lg">
-            Email
-          </label>
-          <input
-            title="Email"
-            id="email"
-            type="email"
-            placeholder="Enter Email"
-            className="border p-2 rounded"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          {emailError && (
-            <div className="bg-red-600 text-white w-fit text-sm px-3 py-1 rounded mt-1">
-              {emailError}
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-slate-700">
+                Email address
+              </label>
+              <div className="mt-1">
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  placeholder="Enter Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="appearance-none block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm placeholder-slate-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all"
+                />
+              </div>
+              {emailError && (
+                <p className="mt-2 text-sm text-rose-600 font-medium">{emailError}</p>
+              )}
             </div>
-          )}
-        </div>
 
-        <div className="flex flex-col gap-1">
-          <label htmlFor="password" className="font-medium text-lg">
-            Password
-          </label>
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium text-slate-700">
+                Password
+              </label>
+              <div className="mt-1 relative rounded-md shadow-sm">
+                <input
+                  id="password"
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  required
+                  placeholder="Enter Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="appearance-none block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm placeholder-slate-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all"
+                />
+                <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                    className="text-slate-400 hover:text-slate-500 focus:outline-none"
+                  >
+                    {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                  </button>
+                </div>
+              </div>
+              {passwordError && (
+                <p className="mt-2 text-sm text-rose-600 font-medium">{passwordError}</p>
+              )}
+            </div>
 
-          <div className="relative flex flex-col gap-1">
-            <div className="relative flex items-center">
-              <input
-                title="Password"
-                id="password"
-                type={showPassword ? "text" : "password"}
-                placeholder="Enter Password"
-                className="border p-2 rounded w-full"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              {/* Eye toggle button */}
+            <div>
+              <label htmlFor="role" className="block text-sm font-medium text-slate-700">
+                Role
+              </label>
+              <div className="mt-1">
+                <select
+                  id="role"
+                  name="role"
+                  value={roleId}
+                  onChange={(e) => setRoleId(e.target.value)}
+                  className="appearance-none block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm bg-white text-slate-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all cursor-pointer"
+                >
+                  <option value="">Select a role</option>
+                  {roles.map((role) => (
+                    <option key={role._id} value={role._id}>
+                      {role.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              {roleError && (
+                <p className="mt-2 text-sm text-rose-600 font-medium">{roleError}</p>
+              )}
+            </div>
+
+            <div className="pt-2">
+              <button
+                type="submit"
+                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
+              >
+                Create Account
+              </button>
+            </div>
+            
+            <div className="pt-2 text-center">
               <button
                 type="button"
-                onClick={() => setShowPassword((prev) => !prev)}
-                className="text-gray-600 absolute right-3 flex items-center cursor-pointer"
+                onClick={() => router.back()}
+                className="text-sm font-medium text-slate-500 hover:text-slate-700 transition-colors"
               >
-                {showPassword ? <EyeOff /> : <Eye />}
-              </button>{" "}
+                Cancel and return
+              </button>
             </div>
-
-            {passwordError && (
-              <div className="bg-red-600 text-white w-fit text-sm px-3 py-1 rounded mt-1">
-                {passwordError}
-              </div>
-            )}
-          </div>
+          </form>
         </div>
-
-        <div className="flex flex-col gap-1">
-          <label htmlFor="role" className="font-medium text-lg">
-            Role
-          </label>
-          <select
-            title="Role"
-            id="role"
-            className="border p-2 rounded cursor-pointer"
-            value={roleId}
-            onChange={(e) => setRoleId(e.target.value)}
-          >
-            <option value="">Select a role</option>
-            {roles.map((role) => (
-              <option key={role._id} value={role._id}>
-                {role.name}
-              </option>
-            ))}
-          </select>
-
-          {roleError && (
-            <div className="bg-red-600 text-white w-fit text-sm px-3 py-1 rounded mt-1">
-              {roleError}
-            </div>
-          )}
-        </div>
-
-        <button
-          type="submit"
-          className="p-2 bg-blue-500 hover:bg-blue-600 mt-3 rounded cursor-pointer mb-1"
-        >
-          Create
-        </button>
-      </form>
+      </div>
     </div>
   );
 }
