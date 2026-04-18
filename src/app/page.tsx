@@ -2,8 +2,17 @@ import LoginPage from "./components/LoginPage";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
+import { connectDatabase } from "../lib/mongodb";
+import User from "../models/user";
 
 export default async function Home() {
+  await connectDatabase();
+  const totalUsers = await User.countDocuments();
+  
+  if (totalUsers === 0) {
+    redirect("/register");
+  }
+
   const session = await getServerSession(authOptions);
   if (session) {
     const roles = session.user?.roles || [];
