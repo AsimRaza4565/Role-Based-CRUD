@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import { toast } from "react-toastify";
+import Loader from "@/app/components/Loader";
 
 interface User {
   _id: string;
@@ -23,6 +24,7 @@ export default function AssignRoles() {
   const [selectedRoles, setSelectedRoles] = useState<string[]>([]);
   const [originalRoles, setOriginalRoles] = useState<string[]>([]);
   const [isUpdating, setIsUpdating] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,6 +35,8 @@ export default function AssignRoles() {
         setRoles(await rolesData.json());
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
@@ -125,6 +129,9 @@ export default function AssignRoles() {
     <div className="bg-slate-50 min-h-screen pb-12">
       <Navbar />
 
+      {loading ? (
+        <Loader />
+      ) : (
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
         <div className="mb-8">
           <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">Assign Roles</h1>
@@ -213,7 +220,7 @@ export default function AssignRoles() {
                     <button
                       onClick={handleRoleUpdate}
                       disabled={isUpdating}
-                      className={`w-full py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${
+                      className={` cursor-pointer w-full py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${
                         !isUpdating
                           ? "bg-indigo-600 hover:bg-indigo-700"
                           : "bg-indigo-400 cursor-not-allowed"
@@ -228,6 +235,7 @@ export default function AssignRoles() {
           </div>
         </div>
       </main>
+      )}
     </div>
   );
 }

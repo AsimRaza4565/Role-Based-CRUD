@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
+import Loader from "@/app/components/Loader";
 import { toast } from "react-toastify";
 
 interface Role {
@@ -23,6 +24,7 @@ export default function AssignRoles() {
   const [selectedPermissions, setSelectedPermissions] = useState<string[]>([]);
   const [originalPermissions, setOriginalPermissions] = useState<string[]>([]);
   const [isUpdating, setIsUpdating] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const ensureReadPermissions = (permissionIds: string[]) => {
     const permissionMap = new Map(permissions.map((permission) => [permission._id, permission]));
@@ -61,6 +63,8 @@ export default function AssignRoles() {
         setPermissions(await permissionsData.json());
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
@@ -161,6 +165,9 @@ export default function AssignRoles() {
     <div className="bg-slate-50 min-h-screen pb-12">
       <Navbar />
 
+      {loading ? (
+        <Loader />
+      ) : (
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
         <div className="mb-8">
           <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">Assign Permissions</h1>
@@ -247,7 +254,7 @@ export default function AssignRoles() {
                       <button
                         onClick={handleRoleUpdate}
                         disabled={isUpdating}
-                        className={`w-full sm:w-auto px-6 py-2.5 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${
+                        className={` cursor-pointer w-full sm:w-auto px-6 py-2.5 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${
                           !isUpdating
                             ? "bg-indigo-600 hover:bg-indigo-700"
                             : "bg-indigo-400 cursor-not-allowed"
@@ -262,7 +269,6 @@ export default function AssignRoles() {
             </div>
           </div>
         </div>
-      </main>
-    </div>
+      </main>      )}    </div>
   );
 }

@@ -5,6 +5,8 @@ import Navbar from "../components/Navbar";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import { useSession } from "next-auth/react";
+import Loader from "@/app/components/Loader";
+import ConfirmationModal from "@/app/components/ConfirmationModal";
 
 interface Permission {
   _id: string;
@@ -15,6 +17,10 @@ interface Permission {
 export default function Permission() {
   const { data: session } = useSession();
   const [permissions, setPermissions] = useState<Permission[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [permissionToDelete, setPermissionToDelete] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,20 +30,24 @@ export default function Permission() {
         setPermissions(data);
       } catch (error) {
         console.error("Error fetching Permissions:", error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
   }, []);
 
-  const handleDeletePermission = async (permissionId: string) => {
+  const handleDeletePermission = async () => {
+    if (!permissionToDelete) return;
+
     try {
-      const response = await fetch(`/api/deletePermission/${permissionId}`, {
+      const response = await fetch(`/api/deletePermission/${permissionToDelete}`, {
         method: "DELETE",
       });
 
       if (response.ok) {
         setPermissions((prev) =>
-          prev.filter((permission) => permission._id !== permissionId)
+          prev.filter((permission) => permission._id !== permissionToDelete)
         );
         toast.success("Permission deleted");
       } else {
@@ -47,7 +57,15 @@ export default function Permission() {
     } catch (error) {
       console.error("Error deleting Permission:", error);
       toast.error("An error occurred while deleting Permission");
+    } finally {
+      setIsModalOpen(false);
+      setPermissionToDelete(null);
     }
+  };
+
+  const openDeleteModal = (permissionId: string) => {
+    setPermissionToDelete(permissionId);
+    setIsModalOpen(true);
   };
 
   return (
@@ -65,7 +83,7 @@ export default function Permission() {
           <div className="mt-4 sm:mt-0">
             {session?.user?.permissions?.includes("permission-create") && (
               <Link href={"/permissions/create"}>
-                <button className="inline-flex items-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">
+                <button className="cursor-pointer inline-flex items-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">
                   <svg className="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path fillRule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clipRule="evenodd" />
                   </svg>
@@ -76,7 +94,9 @@ export default function Permission() {
           </div>
         </div>
 
-        {permissions.length === 0 ? (
+        {loading ? (
+          <Loader />
+        ) : permissions.length === 0 ? (
           <div className="text-center py-16 bg-white border border-slate-200 rounded-xl shadow-sm">
             <svg className="mx-auto h-12 w-12 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -109,15 +129,15 @@ export default function Permission() {
                         <div className="flex justify-end gap-3">
                           {session?.user?.permissions?.includes("permission-update") && (
                             <Link href={`/permissions/update/${permission.slug}`}>
-                              <button className="text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-3 py-1.5 rounded-md transition-colors border border-emerald-200">
+                              <button className="cursor-pointer text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-3 py-1.5 rounded-md transition-colors border border-emerald-200">
                                 Update
                               </button>
                             </Link>
                           )}
                           {session?.user?.permissions?.includes("permission-delete") && (
                             <button
-                              onClick={() => handleDeletePermission(permission._id)}
-                              className="text-rose-700 bg-rose-50 hover:bg-rose-100 px-3 py-1.5 rounded-md transition-colors border border-rose-200"
+                              onClick={() => openDeleteModal(permission._id)}
+                              className="cursor-pointer text-rose-700 bg-rose-50 hover:bg-rose-100 px-3 py-1.5 rounded-md transition-colors border border-rose-200"
                             >
                               Delete
                             </button>
@@ -132,6 +152,18 @@ export default function Permission() {
           </div>
         )}
       </main>
+
+      <ConfirmationModal
+        isOpen={isModalOpen}
+        title="Delete Permission"
+        message="Are you sure you want to delete this permission? This action cannot be undone."
+        onConfirm={handleDeletePermission}
+        onCancel={() => {
+          setIsModalOpen(false);
+          setPermissionToDelete(null);
+        }}
+        confirmText="Delete"
+      />
     </div>
   );
 }

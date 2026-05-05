@@ -241,7 +241,7 @@ export default function CreateUesr() {
                     onClick={() => setShowPassword((prev) => !prev)}
                     className="text-slate-400 hover:text-slate-500 focus:outline-none"
                   >
-                    {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                    {showPassword ? <EyeOff className="h-5 w-5 cursor-pointer" /> : <Eye className="h-5 w-5 cursor-pointer" />}
                   </button>
                 </div>
               </div>
@@ -278,10 +278,10 @@ export default function CreateUesr() {
               </div>
             )}
 
-            <div className="pt-2">
+            <div className="pt-2 mb-2">
               <button
                 type="submit"
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
+                className="cursor-pointer w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
               >
                 Create Account
               </button>
@@ -291,7 +291,7 @@ export default function CreateUesr() {
               <button
                 type="button"
                 onClick={() => router.back()}
-                className="text-sm font-medium text-slate-500 hover:text-slate-700 transition-colors"
+                className="cursor-pointer text-sm font-medium text-slate-500 hover:text-slate-700 transition-colors"
               >
                 Cancel and return
               </button>
