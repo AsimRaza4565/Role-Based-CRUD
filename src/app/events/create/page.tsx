@@ -40,7 +40,7 @@ export default function CreateEvent() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="bg-slate-50 flex flex-col justify-center p-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-3xl font-extrabold text-slate-900">
           Create New Event
@@ -51,7 +51,7 @@ export default function CreateEvent() {
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 border border-slate-200">
+        <div className="bg-white p-8 shadow rounded-lg sm:px-12 border border-slate-200">
           <form onSubmit={handleEventCreate} className="space-y-6" noValidate>
 
             <div>
@@ -67,16 +67,16 @@ export default function CreateEvent() {
                   placeholder="Describe the new event..."
                   value={event}
                   onChange={(e) => setEvent(e.target.value)}
-                  className="appearance-none block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm placeholder-slate-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all resize-none"
+                  className="appearance-none block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm placeholder-slate-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all min-h-25"
                 />
               </div>
             </div>
 
-            <div className="pt-2">
+            <div className="pt-2 mb-2">
               <button
                 type="submit"
                 disabled={!event || isCreating}
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="cursor-pointer w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isCreating ? "Publishing..." : "Publish Event"}
               </button>
@@ -86,7 +86,7 @@ export default function CreateEvent() {
               <button
                 type="button"
                 onClick={() => router.back()}
-                className="text-sm font-medium text-slate-500 hover:text-slate-700 transition-colors"
+                className="cursor-pointer text-sm font-medium text-slate-500 hover:text-slate-700 transition-colors"
               >
                 Cancel and return
               </button>

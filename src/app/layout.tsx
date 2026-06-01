@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import AuthProvider from "./Providers";
 import { ToastContainer } from "react-toastify";
+import AppShell from "./components/AppShell";
 
 export const metadata: Metadata = {
   title: "RBAC-CRUD",
@@ -16,7 +17,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-slate-50 text-slate-800 font-sans">
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          <AppShell>{children}</AppShell>
+        </AuthProvider>
         <ToastContainer />
       </body>
     </html>

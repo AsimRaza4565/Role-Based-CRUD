@@ -136,9 +136,9 @@ export default function EditUser() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-8 sm:py-12 px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-slate-900">
+        <h2 className="mt-4 text-center text-2xl sm:text-3xl font-extrabold text-slate-900">
           Update User Profile
         </h2>
         <p className="mt-2 text-center text-sm text-slate-600">
@@ -147,11 +147,13 @@ export default function EditUser() {
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 border border-slate-200">
+        <div className="bg-white p-6 shadow rounded-lg border border-slate-200">
           <form onSubmit={handleUserEdit} className="space-y-6" noValidate>
-            
             <div>
-              <label htmlFor="username" className="block text-sm font-medium text-slate-700">
+              <label
+                htmlFor="username"
+                className="block text-sm font-medium text-slate-700"
+              >
                 Name
               </label>
               <div className="mt-1">
@@ -167,12 +169,17 @@ export default function EditUser() {
                 />
               </div>
               {nameError && (
-                <p className="mt-2 text-sm text-rose-600 font-medium">{nameError}</p>
+                <p className="mt-2 text-sm text-rose-600 font-medium">
+                  {nameError}
+                </p>
               )}
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-slate-700">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-slate-700"
+              >
                 Email address
               </label>
               <div className="mt-1">
@@ -189,13 +196,21 @@ export default function EditUser() {
                 />
               </div>
               {emailError && (
-                <p className="mt-2 text-sm text-rose-600 font-medium">{emailError}</p>
+                <p className="mt-2 text-sm text-rose-600 font-medium">
+                  {emailError}
+                </p>
               )}
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-slate-700">
-                Password <span className="text-slate-400 font-normal">(Leave blank to keep unchanged)</span>
+              <label
+                htmlFor="password"
+                className="flex flex-col sm:flex-row sm:gap-2 text-sm font-medium text-slate-700"
+              >
+                <span>Password</span>
+                <span className="text-slate-400 font-normal mb-1 sm:m-0">
+                  (Leave blank to keep unchanged)
+                </span>
               </label>
               <div className="mt-1">
                 <input
@@ -209,12 +224,17 @@ export default function EditUser() {
                 />
               </div>
               {passwordError && (
-                <p className="mt-2 text-sm text-rose-600 font-medium">{passwordError}</p>
+                <p className="mt-2 text-sm text-rose-600 font-medium">
+                  {passwordError}
+                </p>
               )}
             </div>
 
             <div>
-              <label htmlFor="role" className="block text-sm font-medium text-slate-700">
+              <label
+                htmlFor="role"
+                className="block text-sm font-medium text-slate-700"
+              >
                 Role
               </label>
               <div className="mt-1">
@@ -234,7 +254,9 @@ export default function EditUser() {
                 </select>
               </div>
               {roleError && (
-                <p className="mt-2 text-sm text-rose-600 font-medium">{roleError}</p>
+                <p className="mt-2 text-sm text-rose-600 font-medium">
+                  {roleError}
+                </p>
               )}
             </div>
 
@@ -247,7 +269,7 @@ export default function EditUser() {
                 Save Changes
               </button>
             </div>
-            
+
             <div className="pt-2 text-center">
               <button
                 type="button"

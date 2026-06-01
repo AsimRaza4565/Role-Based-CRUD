@@ -56,7 +56,7 @@ export default function CreateRole() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="bg-slate-50 flex flex-col justify-center p-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-3xl font-extrabold text-slate-900">
           Create New Role
@@ -67,7 +67,7 @@ export default function CreateRole() {
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 border border-slate-200">
+        <div className="bg-white p-8 shadow rounded-lg sm:px-12 border border-slate-200">
           <form onSubmit={handleRoleCreate} className="space-y-6" noValidate>
             
             <div>
