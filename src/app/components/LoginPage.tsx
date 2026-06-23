@@ -126,7 +126,7 @@ export default function LoginPage() {
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white px-4 py-8 sm:px-4 sm:py-8 shadow rounded-lg border border-slate-200">
+        <div className="bg-white px-4 py-8 sm:p-8 shadow rounded-lg border border-slate-200">
           <form onSubmit={handleSubmit} className="space-y-6" noValidate>
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-slate-700">
