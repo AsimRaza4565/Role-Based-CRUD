@@ -38,7 +38,7 @@ function UpdatePostContent() {
   };
 
   return (
-    <div className="bg-slate-50 flex flex-col justify-center p-8">
+    <div className="min-h-[calc(100vh-68px)] bg-slate-50 flex flex-col justify-center p-4">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-3xl font-extrabold text-slate-900">
           Update Post
@@ -49,7 +49,7 @@ function UpdatePostContent() {
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white p-8 shadow rounded-lg sm:px-12 border border-slate-200">
+        <div className="bg-white px-4 py-8 sm:px-4 sm:py-8 shadow rounded-lg border border-slate-200">
           <form onSubmit={handlePostUpdate} className="space-y-6" noValidate>
             
             <div>

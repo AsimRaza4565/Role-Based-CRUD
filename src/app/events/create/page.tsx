@@ -40,7 +40,7 @@ export default function CreateEvent() {
   };
 
   return (
-    <div className="bg-slate-50 flex flex-col justify-center p-8">
+    <div className="min-h-[calc(100vh-68px)] bg-slate-50 flex flex-col justify-center p-4 sm:p-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-3xl font-extrabold text-slate-900">
           Create New Event
@@ -51,7 +51,7 @@ export default function CreateEvent() {
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white p-8 shadow rounded-lg sm:px-12 border border-slate-200">
+        <div className="bg-white px-4 py-8 sm:px-4 sm:py-8 shadow rounded-lg border border-slate-200">
           <form onSubmit={handleEventCreate} className="space-y-6" noValidate>
 
             <div>
@@ -62,7 +62,7 @@ export default function CreateEvent() {
                 <textarea
                   id="event"
                   name="event"
-                  rows={4}
+                  rows={6}
                   required
                   placeholder="Describe the new event..."
                   value={event}

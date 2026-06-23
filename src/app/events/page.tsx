@@ -61,7 +61,7 @@ export default function Events() {
   };
 
   return (
-    <div className="bg-slate-50 min-h-screen pb-12">
+    <div className="bg-slate-50 pb-4">
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
         <div className="sm:flex sm:items-center sm:justify-between mb-8">
           <div>

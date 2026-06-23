@@ -3,7 +3,7 @@
 interface ConfirmationModalProps {
   isOpen: boolean;
   title: string;
-  message: string;
+  message: React.ReactNode;
   onConfirm: () => void;
   onCancel: () => void;
   confirmText?: string;
@@ -23,8 +23,8 @@ export default function ConfirmationModal({
 }: ConfirmationModalProps) {
   return (
     <div 
-      className={`fixed inset-0 z-50 flex items-center justify-center transition-all duration-300 ${
-        isOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
+      className={`px-8 fixed inset-0 z-50 flex items-center justify-center transition-all duration-300 ${
+        isOpen ? "visible" : "hidden"
       }`}
     >
       <div 

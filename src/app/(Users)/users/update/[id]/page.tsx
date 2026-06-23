@@ -136,7 +136,7 @@ export default function EditUser() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-8 sm:py-12 px-8">
+    <div className="min-h-[calc(100vh-68px)] bg-slate-50 flex flex-col justify-center py-8 sm:py-12 px-4 sm:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="mt-4 text-center text-2xl sm:text-3xl font-extrabold text-slate-900">
           Update User Profile
@@ -147,7 +147,7 @@ export default function EditUser() {
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white p-6 shadow rounded-lg border border-slate-200">
+        <div className="bg-white p-4 sm:p-6 shadow rounded-lg border border-slate-200">
           <form onSubmit={handleUserEdit} className="space-y-6" noValidate>
             <div>
               <label

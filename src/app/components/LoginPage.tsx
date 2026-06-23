@@ -112,7 +112,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-center p-12">
+    <div className="min-h-screen bg-slate-50 flex flex-col justify-center p-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-2xl sm:text-3xl font-extrabold text-slate-900">
           Sign in to your account
@@ -126,7 +126,7 @@ export default function LoginPage() {
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white p-8 shadow rounded-lg sm:px-12 border border-slate-200">
+        <div className="bg-white px-4 py-8 sm:px-4 sm:py-8 shadow rounded-lg border border-slate-200">
           <form onSubmit={handleSubmit} className="space-y-6" noValidate>
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-slate-700">

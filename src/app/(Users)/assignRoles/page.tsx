@@ -114,7 +114,7 @@ export default function AssignRoles() {
   };
 
   return (
-    <div className="bg-slate-50 min-h-screen lg:h-screen lg:overflow-hidden flex flex-col">
+    <div className="bg-slate-50 flex flex-col">
       {loading ? (
         <Loader />
       ) : (
@@ -137,7 +137,8 @@ export default function AssignRoles() {
                     User Directory
                   </h2>
                 </div>
-                <ul className="divide-y divide-slate-100 flex-1 lg:overflow-y-auto overscroll-contain max-h-[40vh] lg:max-h-none overflow-y-auto">
+                <ul className="divide-y divide-slate-100 flex-1 min-h-0 overflow-y-auto">
+                {/* <ul className="divide-y divide-slate-100 flex-1 lg:overflow-y-auto overscroll-contain max-h-[40vh] lg:max-h-none overflow-y-auto"> */}
                   {users.map((user) => {
                     const isSelected = selectedUser?._id === user._id;
                     return (
@@ -215,7 +216,7 @@ export default function AssignRoles() {
                         <button
                           onClick={handleRoleUpdate}
                           disabled={isUpdating}
-                          className={`cursor-pointer md:w-[160px] flex justify-center items-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${
+                          className={`cursor-pointer md:w-[160px] flex justify-center items-center py-2.5 px-2 sm:px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${
                             !isUpdating
                               ? "bg-indigo-600 hover:bg-indigo-700"
                               : "bg-indigo-400 cursor-not-allowed"
@@ -225,7 +226,7 @@ export default function AssignRoles() {
                         </button>
                       </div>
 
-                      <div className="flex-1 overflow-y-auto pr-2 overscroll-contain">
+                      <div className="flex-1 min-h-0 overflow-y-auto pr-2">
                         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 items-center">
                           {roles.map((role) => (
                             <li key={role._id}>

@@ -157,11 +157,11 @@ export default function AssignRoles() {
   };
 
   return (
-    <div className="bg-slate-50 min-h-screen lg:h-screen lg:overflow-hidden flex flex-col">
+    <div className="bg-slate-50 min-h-[calc(100vh-68px)] lg:overflow-hidden flex flex-col">
       {loading ? (
         <Loader />
       ) : (
-        <main className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-8 flex-1 flex flex-col lg:min-h-0 pb-8">
+        <main className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-8 flex-1 flex flex-col min-h-0 pb-8">
           <div className="mb-8 flex-shrink-0">
             <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">
               Assign Permissions
@@ -172,9 +172,9 @@ export default function AssignRoles() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1 lg:min-h-0">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1 min-h-0">
             {/* Roles List */}
-            <div className="flex flex-col lg:h-full lg:min-h-0">
+            <div className="flex flex-col lg:h-full min-h-0">
               <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden flex flex-col h-full lg:h-full">
                 <div className="px-6 py-4 border-b border-slate-200 bg-slate-50/50 flex-shrink-0">
                   <h2 className="text-lg font-semibold text-slate-800">
@@ -182,7 +182,7 @@ export default function AssignRoles() {
                   </h2>
                 </div>
 
-                <ul className="divide-y divide-slate-100 flex-1 lg:overflow-y-auto overscroll-contain max-h-[40vh] lg:max-h-none overflow-y-auto">
+                <ul className="divide-y divide-slate-100 flex-1 min-h-0 overflow-y-auto">
                   {roles?.map((role) => {
                     const isSelected = selectedRole?._id === role._id;
 
@@ -213,7 +213,7 @@ export default function AssignRoles() {
             </div>
 
             {/* Permissions Config */}
-            <div className="flex flex-col lg:h-full lg:min-h-0">
+            <div className="flex flex-col lg:h-full min-h-0">
               <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden flex flex-col h-full lg:h-full">
                 <div className="px-3 sm:px-6 py-4 border-b border-slate-200 bg-slate-50/50 flex-shrink-0">
                   <h2 className="text-lg font-semibold text-slate-800">
@@ -221,7 +221,7 @@ export default function AssignRoles() {
                   </h2>
                 </div>
 
-                <div className="p-3 sm:p-6 flex flex-col flex-1 lg:min-h-0">
+                <div className="p-3 sm:p-6 flex flex-col flex-1 min-h-0">
                   {!selectedRole ? (
                     <div className="text-center py-10">
                       <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 mb-4">
@@ -249,7 +249,7 @@ export default function AssignRoles() {
                       </p>
                     </div>
                   ) : (
-                    <div className="flex flex-col flex-1 lg:min-h-0">
+                    <div className="flex flex-col flex-1 min-h-0">
                       <div className="flex items-center justify-between gap-2 lg:gap-4 mb-4 pb-4 border-b border-slate-100 flex-shrink-0">
                         <p className="text-sm text-slate-500">
                           Managing permissions for{" "}
@@ -285,7 +285,7 @@ export default function AssignRoles() {
                         </button>
                       </div>
 
-                      <div className="flex-1 overflow-y-auto pr-2 overscroll-contain">
+                      <div className="flex-1 min-h-0 overflow-y-auto pr-2">
                         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 items-center">
                           {permissions.map((permission) => (
                             <li key={permission._id}>

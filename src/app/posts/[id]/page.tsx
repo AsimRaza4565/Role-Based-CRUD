@@ -64,7 +64,7 @@ export default function SinglePost() {
 
   if (loading) {
     return (
-      <div className="bg-slate-50 min-h-screen pb-12">
+      <div className="bg-slate-50">
         <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-8">
           <Loader />
         </main>
@@ -74,7 +74,7 @@ export default function SinglePost() {
 
   if (!post) {
     return (
-      <div className="bg-slate-50 min-h-screen pb-12">
+      <div className="bg-slate-50">
         <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-8">
           <div className="text-center py-16 bg-white border border-slate-200 rounded-xl shadow-sm">
             <h3 className="mt-2 text-sm font-medium text-slate-900">Post not found</h3>
@@ -92,10 +92,10 @@ export default function SinglePost() {
   }
 
   return (
-    <div className="bg-slate-50 min-h-screen pb-12">
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 m-0 md:mt-12 pt-8">
+    <div className="bg-slate-50 pb-4">
+      <main className="max-w-4xl mx-auto px-4 sm:px-8 lg:px-8 mt-8 md:mt-16">
         <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden min-h-[400px] flex flex-col">
-          <div className="p-8 md:p-12 flex-grow">
+          <div className="p-4 sm:p-8 md:p-12 flex-grow">
             <Link href="/posts" className="text-sm text-indigo-600 hover:text-indigo-800 font-medium inline-flex items-center mb-6">
               <span className="mr-1 text-2xl pb-2">&larr;</span> Back to Posts
             </Link>
@@ -107,7 +107,7 @@ export default function SinglePost() {
             </div>
           </div>
           
-          <div className="px-8 py-5 bg-slate-50 border-t border-slate-100 flex flex-col md:flex-row md:items-center gap-4 md:gap-0 justify-between">
+          <div className="p-4 sm:p-8 md:p-12 bg-slate-50 border-t border-slate-100 flex flex-col md:flex-row md:items-center gap-4 md:gap-0 justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 p-1 rounded-full bg-slate-100 border border-slate-300 flex items-center justify-center overflow-hidden shrink-0">
                 <svg
