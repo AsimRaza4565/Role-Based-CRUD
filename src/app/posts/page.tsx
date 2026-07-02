@@ -64,7 +64,7 @@ export default function Posts() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
         <div className="sm:flex sm:items-center sm:justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">
+            <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
               Posts
             </h1>
             <p className="mt-2 text-sm text-slate-500">
@@ -74,7 +74,7 @@ export default function Posts() {
           <div className="mt-4 sm:mt-0">
             {session?.user?.permissions?.includes("post-create") && (
               <Link href={"/posts/create"}>
-                <button className="cursor-pointer inline-flex items-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">
+                <button className="cursor-pointer inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">
                   <svg
                     className="-ml-1 mr-2 h-5 w-5"
                     xmlns="http://www.w3.org/2000/svg"
@@ -98,7 +98,7 @@ export default function Posts() {
         {loading ? (
           <Loader />
         ) : posts.length === 0 ? (
-          <div className="text-center py-16 bg-white border border-slate-200 rounded-xl shadow-sm">
+          <div className="text-center py-16 bg-white border border-slate-200 shadow-sm">
             <svg
               className="mx-auto h-12 w-12 text-slate-300"
               fill="none"
@@ -120,11 +120,11 @@ export default function Posts() {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
             {posts.map((post) => (
               <div
                 key={post._id}
-                className="flex flex-col h-full bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden"
+                className="flex flex-col h-full bg-white border border-slate-200 shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden"
               >
                 <Link
                   href={`/posts/${post._id}`}
@@ -164,7 +164,7 @@ export default function Posts() {
                       <Link
                         href={`/posts/update?id=${post._id}&title=${encodeURIComponent(post.title)}&content=${encodeURIComponent(post.content)}`}
                       >
-                        <button className="cursor-pointer text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-3 py-1.5 rounded-md transition-colors border border-emerald-200 text-sm font-medium">
+                        <button className="w-20 cursor-pointer text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-3 py-1.5 transition-colors border border-emerald-300 text-sm font-medium">
                           Edit
                         </button>
                       </Link>
@@ -172,7 +172,7 @@ export default function Posts() {
                     {session?.user?.permissions?.includes("post-delete") && (
                       <button
                         onClick={() => openDeleteModal(post._id)}
-                        className="cursor-pointer text-rose-700 bg-rose-50 hover:bg-rose-100 px-3 py-1.5 rounded-md transition-colors border border-rose-200 text-sm font-medium"
+                        className="w-20 cursor-pointer text-rose-700 bg-rose-50 hover:bg-rose-100 px-3 py-1.5 transition-colors border border-rose-300 text-sm font-medium"
                       >
                         Delete
                       </button>

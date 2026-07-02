@@ -34,7 +34,7 @@ export default function ConfirmationModal({
         onClick={onCancel}
       />
       <div 
-        className={`bg-white rounded-xl shadow-xl w-full max-w-md p-6 transform transition-all duration-300 relative ${
+        className={`bg-white shadow-xl w-full max-w-md p-6 transform transition-all duration-300 relative ${
           isOpen ? "scale-100 translate-y-0 opacity-100" : "scale-95 translate-y-4 opacity-0"
         }`}
       >
@@ -62,13 +62,13 @@ export default function ConfirmationModal({
         <div className="mt-6 flex gap-3 justify-end">
           <button
             onClick={onCancel}
-            className="cursor-pointer px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
+            className="cursor-pointer px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
           >
             {cancelText}
           </button>
           <button
             onClick={onConfirm}
-            className={`cursor-pointer px-4 py-2 text-sm font-medium text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors ${
+            className={`cursor-pointer px-4 py-2 text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors ${
               isDestructive 
                 ? "bg-rose-600 hover:bg-rose-700 focus:ring-rose-500" 
                 : "bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500"

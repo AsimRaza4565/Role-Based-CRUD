@@ -80,7 +80,7 @@ export default function UsersPage() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
         <div className="flex flex-col justify-start gap-4 md:justify-between md:flex-row md:gap-0 mb-8">
           <div>
-            <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">
+            <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
               Registered Users
             </h1>
             <p className="mt-2 text-sm text-slate-500">
@@ -91,7 +91,7 @@ export default function UsersPage() {
           <div>
             {session?.user?.permissions?.includes("user-create") && (
               <Link href={"/users/create"}>
-                <button className="cursor-pointer inline-flex items-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">
+                <button className="cursor-pointer inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">
                   <svg
                     className="-ml-1 mr-2 h-5 w-5"
                     xmlns="http://www.w3.org/2000/svg"
@@ -115,7 +115,7 @@ export default function UsersPage() {
         {loading ? (
           <Loader />
         ) : users.length === 0 ? (
-          <div className="text-center py-16 bg-white border border-slate-200 rounded-xl shadow-sm">
+          <div className="text-center py-16 bg-white border border-slate-200 shadow-sm">
             <svg
               className="mx-auto h-12 w-12 text-slate-300"
               fill="none"
@@ -138,7 +138,7 @@ export default function UsersPage() {
           </div>
         ) : (
           <>
-            <div className="hidden sm:block bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+            <div className="hidden sm:block bg-white shadow-sm border border-slate-200 overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="min-w-full divide-y divide-slate-200">
                   <thead className="bg-slate-50">
@@ -182,7 +182,7 @@ export default function UsersPage() {
                               "user-update",
                             ) && (
                               <Link href={`/users/update/${user._id}`}>
-                                <button className="cursor-pointer text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-3 py-1.5 rounded-md transition-colors border border-emerald-200">
+                                <button className="cursor-pointer text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-3 py-1.5 transition-colors border border-emerald-300">
                                   Update
                                 </button>
                               </Link>
@@ -192,7 +192,7 @@ export default function UsersPage() {
                             ) && (
                               <button
                                 onClick={() => openDeleteModal(user._id)}
-                                className="cursor-pointer text-rose-700 bg-rose-50 hover:bg-rose-100 px-3 py-1.5 rounded-md transition-colors border border-rose-200"
+                                className="cursor-pointer text-rose-700 bg-rose-50 hover:bg-rose-100 px-3 py-1.5 transition-colors border border-rose-300"
                               >
                                 Delete
                               </button>
@@ -211,7 +211,7 @@ export default function UsersPage() {
               {users.map((user) => (
                 <div
                   key={user._id}
-                  className="bg-white border border-slate-200 rounded-xl p-4 shadow-sm"
+                  className="bg-white border border-slate-200 p-4 shadow-sm"
                 >
                   <div className="space-y-1">
                     <h3 className="text-sm font-semibold text-slate-900">
@@ -223,13 +223,13 @@ export default function UsersPage() {
                     </p>
                   </div>
 
-                  <div className="flex gap-2 mt-4">
+                  <div className="flex gap-4 mt-4">
                     {session?.user?.permissions?.includes("user-update") && (
                       <Link
                         href={`/users/update/${user._id}`}
                         className="flex-1"
                       >
-                        <button className="w-full cursor-pointer text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-3 py-2 rounded-lg transition-colors border border-emerald-200 text-sm font-medium">
+                        <button className="w-full cursor-pointer text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-3 py-2 transition-colors border border-emerald-300 text-sm font-medium">
                           Update
                         </button>
                       </Link>
@@ -238,7 +238,7 @@ export default function UsersPage() {
                     {session?.user?.permissions?.includes("user-delete") && (
                       <button
                         onClick={() => openDeleteModal(user._id)}
-                        className="flex-1 cursor-pointer text-rose-700 bg-rose-50 hover:bg-rose-100 px-3 py-2 rounded-lg transition-colors border border-rose-200 text-sm font-medium"
+                        className="flex-1 cursor-pointer text-rose-700 bg-rose-50 hover:bg-rose-100 px-3 py-2 transition-colors border border-rose-300 text-sm font-medium"
                       >
                         Delete
                       </button>

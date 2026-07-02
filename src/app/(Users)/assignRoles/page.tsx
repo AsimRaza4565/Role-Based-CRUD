@@ -120,7 +120,7 @@ export default function AssignRoles() {
       ) : (
         <main className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-8 flex-1 flex flex-col lg:min-h-0 pb-8">
           <div className="mb-8 flex-shrink-0">
-            <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">
+            <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
               Assign Roles
             </h1>
             <p className="mt-2 text-sm text-slate-500">
@@ -131,7 +131,7 @@ export default function AssignRoles() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1 lg:min-h-0">
             {/* Users list - Master View */}
             <div className="flex flex-col lg:h-full lg:min-h-0">
-              <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden flex flex-col h-full lg:h-full">
+              <div className="bg-white shadow-sm border border-slate-200 overflow-hidden flex flex-col h-full lg:h-full">
                 <div className="px-6 py-4 border-b border-slate-200 bg-slate-50/50 flex-shrink-0">
                   <h2 className="text-lg font-semibold text-slate-800">
                     User Directory
@@ -172,7 +172,7 @@ export default function AssignRoles() {
 
             {/* Roles config - Detail View */}
             <div className="flex flex-col lg:h-full lg:min-h-0">
-              <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden flex flex-col h-full lg:h-full">
+              <div className="bg-white shadow-sm border border-slate-200 overflow-hidden flex flex-col h-full lg:h-full">
                 <div className="px-3 sm:px-6 py-4 border-b border-slate-200 bg-slate-50/50 flex-shrink-0">
                   <h2 className="text-lg font-semibold text-slate-800">
                     Assigned Roles
@@ -216,7 +216,7 @@ export default function AssignRoles() {
                         <button
                           onClick={handleRoleUpdate}
                           disabled={isUpdating}
-                          className={`cursor-pointer md:w-[160px] flex justify-center items-center py-2.5 px-2 sm:px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${
+                          className={`cursor-pointer md:w-[160px] flex justify-center items-center py-2.5 px-2 sm:px-4 border border-transparent shadow-sm text-sm font-medium text-white transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${
                             !isUpdating
                               ? "bg-indigo-600 hover:bg-indigo-700"
                               : "bg-indigo-400 cursor-not-allowed"
@@ -230,13 +230,13 @@ export default function AssignRoles() {
                         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 items-center">
                           {roles.map((role) => (
                             <li key={role._id}>
-                              <label className="flex items-center gap-3 cursor-pointer p-2 rounded-lg hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
+                              <label className="flex items-center gap-3 cursor-pointer p-2 hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
                                 <input
                                   type="checkbox"
                                   value={role._id}
                                   checked={selectedRoles.includes(role._id)}
                                   onChange={() => handleRoleToggle(role._id)}
-                                  className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-slate-300 rounded cursor-pointer"
+                                  className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-slate-300 cursor-pointer"
                                 />
                                 <span className="text-sm font-medium text-slate-700">
                                   {role.name}

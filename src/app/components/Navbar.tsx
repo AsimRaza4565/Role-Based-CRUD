@@ -57,7 +57,7 @@ export default function Navbar() {
     }`;
 
   const mobileLinkClass = (href: string) =>
-    `flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
+    `flex items-center gap-3 px-4 py-3 text-sm font-medium transition-all ${
       pathname === href
         ? "bg-indigo-50 text-indigo-700 font-semibold"
         : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
@@ -90,7 +90,7 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={() => signOut({ callbackUrl: "/" })}
-                className="cursor-pointer inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-slate-900 hover:bg-slate-800 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900"
+                className="cursor-pointer inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium shadow-sm text-white bg-slate-900 hover:bg-slate-800 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900"
               >
                 Logout
               </button>
@@ -101,7 +101,7 @@ export default function Navbar() {
                 onClick={() => setMenuOpen((prev) => !prev)}
                 aria-label={menuOpen ? "Close menu" : "Open menu"}
                 aria-expanded={menuOpen}
-                className="lg:hidden inline-flex items-center justify-center w-9 h-9 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="lg:hidden inline-flex items-center justify-center w-9 h-9 text-slate-600 hover:bg-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500"
               >
                 {menuOpen ? (
                   /* X icon */
@@ -146,23 +146,6 @@ export default function Navbar() {
             ) : (
               <p className="px-4 py-3 text-sm text-slate-400 italic">No pages available</p>
             )}
-
-            {/* Mobile logout */}
-            <div className="pt-3 border-t border-slate-100 mt-3">
-              <button
-                type="button"
-                onClick={() => {
-                  setMenuOpen(false);
-                  signOut({ callbackUrl: "/" });
-                }}
-                className="cursor-pointer w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 transition-colors"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6a2 2 0 012 2v1" />
-                </svg>
-                Sign out
-              </button>
-            </div>
           </div>
         </div>
       </nav>

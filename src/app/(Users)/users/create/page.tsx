@@ -166,7 +166,7 @@ export default function CreateUesr() {
   return (
     <div className="min-h-[calc(100vh-68px)] bg-slate-50 flex flex-col justify-center py-12 px-4 sm:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="text-center text-3xl font-extrabold text-slate-900">
+        <h2 className="text-center text-3xl font-bold text-slate-900">
           Create New User
         </h2>
         <p className="mt-2 text-center text-sm text-slate-600">
@@ -175,7 +175,7 @@ export default function CreateUesr() {
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white p-4 sm:p-6 shadow rounded-lg border border-slate-200">
+        <div className="bg-white p-4 sm:p-6 shadow border border-slate-200">
           <form onSubmit={handleUserCreate} className="space-y-6" noValidate>
             
             <div>
@@ -191,7 +191,7 @@ export default function CreateUesr() {
                   placeholder="Enter User's Name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="appearance-none block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm placeholder-slate-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all"
+                  className="appearance-none block w-full px-3 py-2 border border-slate-300 shadow-sm placeholder-slate-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all"
                 />
               </div>
               {nameError && (
@@ -212,7 +212,7 @@ export default function CreateUesr() {
                   placeholder="Enter Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="appearance-none block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm placeholder-slate-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all"
+                  className="appearance-none block w-full px-3 py-2 border border-slate-300 shadow-sm placeholder-slate-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all"
                 />
               </div>
               {emailError && (
@@ -224,7 +224,7 @@ export default function CreateUesr() {
               <label htmlFor="password" className="block text-sm font-medium text-slate-700">
                 Password
               </label>
-              <div className="mt-1 relative rounded-md shadow-sm">
+              <div className="mt-1 relative shadow-sm">
                 <input
                   id="password"
                   name="password"
@@ -233,7 +233,7 @@ export default function CreateUesr() {
                   placeholder="Enter Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="appearance-none block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm placeholder-slate-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all"
+                  className="appearance-none block w-full px-3 py-2 border border-slate-300 shadow-sm placeholder-slate-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all"
                 />
                 <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
                   <button
@@ -261,7 +261,7 @@ export default function CreateUesr() {
                     name="role"
                     value={roleId}
                     onChange={(e) => setRoleId(e.target.value)}
-                    className="appearance-none block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm bg-white text-slate-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all cursor-pointer"
+                    className="appearance-none block w-full px-3 py-2 border border-slate-300 shadow-sm bg-white text-slate-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all cursor-pointer"
                   >
                     <option value="">Select a role</option>
                     {roles.map((role) => (
@@ -273,7 +273,7 @@ export default function CreateUesr() {
                 </div>
               </div>
             ) : (
-              <div className="rounded-md border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-600">
+              <div className="border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-600">
                 A default role will be assigned automatically.
               </div>
             )}
@@ -281,7 +281,7 @@ export default function CreateUesr() {
             <div className="pt-2 mb-2">
               <button
                 type="submit"
-                className="cursor-pointer w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
+                className="cursor-pointer w-full flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
               >
                 Create Account
               </button>

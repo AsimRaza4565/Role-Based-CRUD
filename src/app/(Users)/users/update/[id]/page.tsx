@@ -138,7 +138,7 @@ export default function EditUser() {
   return (
     <div className="min-h-[calc(100vh-68px)] bg-slate-50 flex flex-col justify-center py-8 sm:py-12 px-4 sm:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="mt-4 text-center text-2xl sm:text-3xl font-extrabold text-slate-900">
+        <h2 className="mt-4 text-center text-2xl sm:text-3xl font-bold text-slate-900">
           Update User Profile
         </h2>
         <p className="mt-2 text-center text-sm text-slate-600">
@@ -147,7 +147,7 @@ export default function EditUser() {
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white p-4 sm:p-6 shadow rounded-lg border border-slate-200">
+        <div className="bg-white p-4 sm:p-6 shadow border border-slate-200">
           <form onSubmit={handleUserEdit} className="space-y-6" noValidate>
             <div>
               <label
@@ -165,7 +165,7 @@ export default function EditUser() {
                   placeholder="Enter User's Name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="appearance-none block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm placeholder-slate-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm transition-all"
+                  className="appearance-none block w-full px-3 py-2 border border-slate-300 shadow-sm placeholder-slate-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm transition-all"
                 />
               </div>
               {nameError && (
@@ -191,7 +191,7 @@ export default function EditUser() {
                   placeholder="Enter Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="appearance-none block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm placeholder-slate-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm transition-all bg-slate-50 text-slate-500 cursor-not-allowed"
+                  className="appearance-none block w-full px-3 py-2 border border-slate-300 shadow-sm placeholder-slate-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm transition-all bg-slate-50 text-slate-500 cursor-not-allowed"
                   disabled
                 />
               </div>
@@ -220,7 +220,7 @@ export default function EditUser() {
                   placeholder="Update Password (Optional)"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="appearance-none block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm placeholder-slate-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm transition-all"
+                  className="appearance-none block w-full px-3 py-2 border border-slate-300 shadow-sm placeholder-slate-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm transition-all"
                 />
               </div>
               {passwordError && (
@@ -237,21 +237,30 @@ export default function EditUser() {
               >
                 Role
               </label>
-              <div className="mt-1">
+              <div className="mt-1 relative">
                 <select
                   id="role"
                   name="role"
                   value={role}
                   onChange={(e) => setRole(e.target.value)}
-                  className="appearance-none block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm bg-white text-slate-900 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm transition-all cursor-pointer"
+                  className="appearance-none w-full px-3 py-2 pr-10 border border-slate-300 shadow-sm bg-white text-slate-900 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 cursor-pointer"
                 >
-                  <option value="">Select a role</option>
+                  <option value="" disabled>Select a role</option>
                   {roles.map((role) => (
                     <option key={role._id} value={role._id}>
                       {role.name}
                     </option>
                   ))}
                 </select>
+                <svg
+                  className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
               </div>
               {roleError && (
                 <p className="mt-2 text-sm text-rose-600 font-medium">
@@ -264,7 +273,7 @@ export default function EditUser() {
               <button
                 type="submit"
                 disabled={!name || !email}
-                className="cursor-pointer w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="cursor-pointer w-full flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Save Changes
               </button>

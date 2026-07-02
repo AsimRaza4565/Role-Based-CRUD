@@ -65,7 +65,7 @@ export default function Events() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
         <div className="sm:flex sm:items-center sm:justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">
+            <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
               Events
             </h1>
             <p className="mt-2 text-sm text-slate-500">
@@ -75,7 +75,7 @@ export default function Events() {
           <div className="mt-4 sm:mt-0">
             {session?.user?.permissions?.includes("event-create") && (
               <Link href={"/events/create"}>
-                <button className="cursor-pointer inline-flex items-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">
+                <button className="cursor-pointer inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">
                   <svg
                     className="-ml-1 mr-2 h-5 w-5"
                     xmlns="http://www.w3.org/2000/svg"
@@ -99,7 +99,7 @@ export default function Events() {
         {loading ? (
           <Loader />
         ) : events.length === 0 ? (
-          <div className="text-center py-16 bg-white border border-slate-200 rounded-xl shadow-sm">
+          <div className="text-center py-16 bg-white border border-slate-200 shadow-sm">
             <svg
               className="mx-auto h-12 w-12 text-slate-300"
               fill="none"
@@ -125,14 +125,14 @@ export default function Events() {
             {events.map((event) => (
               <div
                 key={event._id}
-                className="flex flex-col h-full bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden"
+                className="flex flex-col h-full bg-white border border-slate-200 shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden"
               >
                 <Link
                   href={`/events/${event._id}`}
                   className="p-6 flex-grow flex flex-col hover:bg-slate-50 transition-colors"
                 >
                   <div className="flex items-start gap-4 flex-grow">
-                    <div className="bg-indigo-50 p-3 rounded-lg text-indigo-600 shrink-0">
+                    <div className="bg-indigo-50 p-3 text-indigo-600 shrink-0">
                       <svg
                         className="w-6 h-6"
                         fill="none"
@@ -158,7 +158,7 @@ export default function Events() {
                     <Link
                       href={`/events/update?id=${event._id}&description=${encodeURIComponent(event.description)}`}
                     >
-                      <button className="cursor-pointer text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-3 py-1.5 rounded-md transition-colors border border-emerald-200 text-sm font-medium">
+                      <button className="w-20 cursor-pointer text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-3 py-1.5 transition-colors border border-emerald-300 text-sm font-medium">
                         Edit
                       </button>
                     </Link>
@@ -169,7 +169,7 @@ export default function Events() {
                         e.preventDefault(); // Prevent navigating to single event page
                         openDeleteModal(event._id);
                       }}
-                      className="cursor-pointer text-rose-700 bg-rose-50 hover:bg-rose-100 px-3 py-1.5 rounded-md transition-colors border border-rose-200 text-sm font-medium"
+                      className="w-20 cursor-pointer text-rose-700 bg-rose-50 hover:bg-rose-100 px-3 py-1.5 transition-colors border border-rose-300 text-sm font-medium"
                     >
                       Delete
                     </button>

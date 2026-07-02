@@ -76,7 +76,7 @@ export default function SingleEvent() {
     return (
       <div className="bg-slate-50">
         <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-8">
-          <div className="text-center py-16 bg-white border border-slate-200 rounded-xl shadow-sm">
+          <div className="text-center py-16 bg-white border border-slate-200 shadow-sm">
             <h3 className="mt-2 text-sm font-medium text-slate-900">Event not found</h3>
             <div className="mt-4">
               <Link href="/events">
@@ -94,16 +94,16 @@ export default function SingleEvent() {
   return (
     <div className="bg-slate-50 pb-4">
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 md:mt-16">
-        <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden min-h-[400px] flex flex-col">
+        <div className="bg-white border border-slate-200 shadow-sm overflow-hidden min-h-[400px] flex flex-col">
           <div className="p-4 sm:p-8 md:p-12 flex-grow">
             <Link href="/events" className="text-sm text-indigo-600 hover:text-indigo-800 font-medium inline-flex items-center mb-6">
               <span className="mr-1 text-2xl pb-2">&larr;</span> Back to Events
             </Link>
-            <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3 md:mb-6 leading-tight">
+            <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-3 md:mb-6 leading-tight">
               Event Details
             </h1>
             <div className="prose prose-slate max-w-none text-slate-700 whitespace-pre-wrap flex flex-col md:flex-row items-start gap-4">
-              <div className="bg-indigo-50 p-3 rounded-lg text-indigo-600 shrink-0">
+              <div className="bg-indigo-50 p-3 text-indigo-600 shrink-0">
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
@@ -115,13 +115,13 @@ export default function SingleEvent() {
           </div>
           
           <div className="px-4 sm:px-8 md:px-12 py-6 bg-slate-50 border-t border-slate-100 flex items-center justify-between md:flex-row-reverse">
-             <div className="flex gap-3 w-full">
+             <div className="flex gap-6 w-full">
               {session?.user?.permissions?.includes("event-update") && (
                 <Link
                   href={`/events/update?id=${event._id}&description=${encodeURIComponent(event.description)}`}
                   className="flex-1"
                 >
-                  <button className="w-full cursor-pointer py-3 text-md font-medium rounded-lg text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 shadow-sm transition-colors">
+                  <button className="w-full cursor-pointer py-3 text-md font-medium text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 shadow-sm transition-colors">
                     Edit Event
                   </button>
                 </Link>
@@ -129,7 +129,7 @@ export default function SingleEvent() {
               {session?.user?.permissions?.includes("event-delete") && (
                 <button
                   onClick={() => setIsModalOpen(true)}
-                  className="w-full flex-1 cursor-pointer py-3 text-md font-medium rounded-lg text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200 shadow-sm transition-colors"
+                  className="w-full flex-1 cursor-pointer py-3 text-md font-medium text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-300 shadow-sm transition-colors"
                 >
                   Delete Event
                 </button>
